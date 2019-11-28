@@ -44,7 +44,22 @@
 export default {
     name: 'BingoCardComponent',
     mounted() {
-
+        console.log(this.range(1, 15));
+        console.log(this.range(16, 30));
+        console.log(this.range(31, 45));
+        console.log(this.range(46, 60));
+    },
+    methods: {
+        createCard() {
+        },
+        range(min, max) {
+            return Array.from(Array(max), (v, k) => {
+                let num = min + k;
+                if (max < num) return null;
+                k = num;
+                return k;
+            }).filter(v => v);
+        }
     }
 }
 </script>

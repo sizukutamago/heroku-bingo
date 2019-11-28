@@ -1882,7 +1882,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BingoCardComponent',
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    console.log(this.range(1, 15));
+    console.log(this.range(16, 30));
+    console.log(this.range(31, 45));
+    console.log(this.range(46, 60));
+  },
+  methods: {
+    createCard: function createCard() {},
+    range: function range(min, max) {
+      return Array.from(Array(max), function (v, k) {
+        var num = min + k;
+        if (max < num) return null;
+        k = num;
+        return k;
+      }).filter(function (v) {
+        return v;
+      });
+    }
+  }
 });
 
 /***/ }),
