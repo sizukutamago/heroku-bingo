@@ -43,15 +43,23 @@
 <script>
 export default {
     name: 'BingoCardComponent',
+    data() {
+        return {
+            firstLine: [],
+            secondLine: [],
+            thirdLine: [],
+            fourthLine: [],
+            fifthLine: []
+        }
+    },
     mounted() {
-        console.log(this.range(1, 15));
-        console.log(this.range(16, 30));
-        console.log(this.range(31, 45));
-        console.log(this.range(46, 60));
+        this.firstLine = this.getBingoColumn(this.range(1, 15));
+        this.secondLine = this.getBingoColumn(this.range(16, 30));
+        this.thirdLine = this.getBingoColumn(this.range(31, 45));
+        this.fourthLine = this.getBingoColumn(this.range(46, 60));
+        this.fifthLine = this.getBingoColumn(this.range(61, 75));
     },
     methods: {
-        createCard() {
-        },
         range(min, max) {
             return Array.from(Array(max), (v, k) => {
                 let num = min + k;
@@ -59,6 +67,15 @@ export default {
                 k = num;
                 return k;
             }).filter(v => v);
+        },
+        getBingoColumn(array) {
+            for(let i = array.length - 1; i > 0; i--){
+                let r = Math.floor(Math.random() * (i + 1));
+                let tmp = array[i];
+                array[i] = array[r];
+                array[r] = tmp;
+            }
+            return array.slice(0, 5);
         }
     }
 }

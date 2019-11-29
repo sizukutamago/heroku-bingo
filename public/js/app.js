@@ -1882,11 +1882,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BingoCardComponent',
+  data: function data() {
+    return {
+      firstLine: [],
+      secondLine: [],
+      thirdLine: [],
+      fourthLine: [],
+      fifthLine: []
+    };
+  },
   mounted: function mounted() {
-    console.log(this.range(1, 15));
-    console.log(this.range(16, 30));
-    console.log(this.range(31, 45));
-    console.log(this.range(46, 60));
+    this.firstLine = this.getBingoColumn(this.range(1, 15));
+    this.secondLine = this.getBingoColumn(this.range(16, 30));
+    this.thirdLine = this.getBingoColumn(this.range(31, 45));
+    this.fourthLine = this.getBingoColumn(this.range(46, 60));
+    this.fifthLine = this.getBingoColumn(this.range(61, 75));
   },
   methods: {
     createCard: function createCard() {},
@@ -1899,6 +1909,16 @@ __webpack_require__.r(__webpack_exports__);
       }).filter(function (v) {
         return v;
       });
+    },
+    getBingoColumn: function getBingoLine(array) {
+      for (var i = array.length - 1; i > 0; i--) {
+        var r = Math.floor(Math.random() * (i + 1));
+        var tmp = array[i];
+        array[i] = array[r];
+        array[r] = tmp;
+      }
+
+      return array.slice(0, 5);
     }
   }
 });
@@ -49621,7 +49641,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "23ca4e89",
   null
-  
+
 )
 
 /* hot reload */
@@ -49641,7 +49661,7 @@ component.options.__file = "resources/js/components/BingoCardComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BingoCardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./BingoCardComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BingoCardComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BingoCardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BingoCardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
