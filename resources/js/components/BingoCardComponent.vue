@@ -60,9 +60,6 @@ export default {
         this.fifthLine = this.getBingoColumn(this.range(61, 75));
     },
     methods: {
-        createBingoCard() {
-
-        },
         range(min, max) {
             return Array.from(Array(max), (v, k) => {
                 let num = min + k;
