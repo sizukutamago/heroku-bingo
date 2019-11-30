@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('bingo/index');
-});
+Route::view('/', 'bingo/index');
