@@ -2,39 +2,39 @@
     <div>
         <table border="1">
             <tr>
-                <td>1</td>
-                <td>16</td>
-                <td>31</td>
-                <td>46</td>
-                <td>61</td>
+                <td>{{firstLine[0]}}</td>
+                <td>{{secondLine[0]}}</td>
+                <td>{{thirdLine[0]}}</td>
+                <td>{{fourthLine[0]}}</td>
+                <td>{{fifthLine[0]}}</td>
             </tr>
             <tr>
-                <td>2</td>
-                <td>17</td>
-                <td>32</td>
-                <td>47</td>
-                <td>62</td>
+                <td>{{firstLine[1]}}</td>
+                <td>{{secondLine[1]}}</td>
+                <td>{{thirdLine[1]}}</td>
+                <td>{{fourthLine[1]}}</td>
+                <td>{{fifthLine[1]}}</td>
             </tr>
             <tr>
-                <td>3</td>
-                <td>18</td>
+                <td>{{firstLine[2]}}</td>
+                <td>{{secondLine[2]}}</td>
                 <td>0</td>
-                <td>48</td>
-                <td>63</td>
+                <td>{{fourthLine[2]}}</td>
+                <td>{{fifthLine[2]}}</td>
             </tr>
             <tr>
-                <td>4</td>
-                <td>19</td>
-                <td>34</td>
-                <td>49</td>
-                <td>64</td>
+                <td>{{firstLine[3]}}</td>
+                <td>{{secondLine[3]}}</td>
+                <td>{{thirdLine[3]}}</td>
+                <td>{{fourthLine[3]}}</td>
+                <td>{{fifthLine[3]}}</td>
             </tr>
             <tr>
-                <td>5</td>
-                <td>20</td>
-                <td>35</td>
-                <td>50</td>
-                <td>65</td>
+                <td>{{firstLine[4]}}</td>
+                <td>{{secondLine[4]}}</td>
+                <td>{{thirdLine[4]}}</td>
+                <td>{{fourthLine[4]}}</td>
+                <td>{{fifthLine[4]}}</td>
             </tr>
         </table>
     </div>
@@ -60,6 +60,9 @@ export default {
         this.fifthLine = this.getBingoColumn(this.range(61, 75));
     },
     methods: {
+        createBingoCard() {
+
+        },
         range(min, max) {
             return Array.from(Array(max), (v, k) => {
                 let num = min + k;

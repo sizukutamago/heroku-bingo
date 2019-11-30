@@ -1899,7 +1899,7 @@ __webpack_require__.r(__webpack_exports__);
     this.fifthLine = this.getBingoColumn(this.range(61, 75));
   },
   methods: {
-    createCard: function createCard() {},
+    createBingoCard: function createBingoCard() {},
     range: function range(min, max) {
       return Array.from(Array(max), function (v, k) {
         var num = min + k;
@@ -1910,7 +1910,7 @@ __webpack_require__.r(__webpack_exports__);
         return v;
       });
     },
-    getBingoColumn: function getBingoLine(array) {
+    getBingoColumn: function getBingoColumn(array) {
       for (var i = array.length - 1; i > 0; i--) {
         var r = Math.floor(Math.random() * (i + 1));
         var tmp = array[i];
@@ -37317,78 +37317,71 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("table", { attrs: { border: "1" } }, [
-        _c("tr", [
-          _c("td", [_vm._v("1")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("16")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("31")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("46")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("61")])
-        ]),
+  return _c("div", [
+    _c("table", { attrs: { border: "1" } }, [
+      _c("tr", [
+        _c("td", [_vm._v(_vm._s(_vm.firstLine[0]))]),
         _vm._v(" "),
-        _c("tr", [
-          _c("td", [_vm._v("2")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("17")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("32")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("47")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("62")])
-        ]),
+        _c("td", [_vm._v(_vm._s(_vm.secondLine[0]))]),
         _vm._v(" "),
-        _c("tr", [
-          _c("td", [_vm._v("3")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("18")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("0")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("48")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("63")])
-        ]),
+        _c("td", [_vm._v(_vm._s(_vm.thirdLine[0]))]),
         _vm._v(" "),
-        _c("tr", [
-          _c("td", [_vm._v("4")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("19")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("34")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("49")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("64")])
-        ]),
+        _c("td", [_vm._v(_vm._s(_vm.fourthLine[0]))]),
         _vm._v(" "),
-        _c("tr", [
-          _c("td", [_vm._v("5")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("20")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("35")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("50")]),
-          _vm._v(" "),
-          _c("td", [_vm._v("65")])
-        ])
+        _c("td", [_vm._v(_vm._s(_vm.fifthLine[0]))])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", [_vm._v(_vm._s(_vm.firstLine[1]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.secondLine[1]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.thirdLine[1]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.fourthLine[1]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.fifthLine[1]))])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", [_vm._v(_vm._s(_vm.firstLine[2]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.secondLine[2]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v("0")]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.fourthLine[2]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.fifthLine[2]))])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", [_vm._v(_vm._s(_vm.firstLine[3]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.secondLine[3]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.thirdLine[3]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.fourthLine[3]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.fifthLine[3]))])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", [_vm._v(_vm._s(_vm.firstLine[4]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.secondLine[4]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.thirdLine[4]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.fourthLine[4]))]),
+        _vm._v(" "),
+        _c("td", [_vm._v(_vm._s(_vm.fifthLine[4]))])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49641,7 +49634,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   "23ca4e89",
   null
-
+  
 )
 
 /* hot reload */
@@ -49661,7 +49654,7 @@ component.options.__file = "resources/js/components/BingoCardComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BingoCardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./BingoCardComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BingoCardComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BingoCardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BingoCardComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
