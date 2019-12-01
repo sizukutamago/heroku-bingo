@@ -15,15 +15,3 @@
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
-<script>
-import BingoCardComponent from '../../js/components/BingoCardComponent'
-export default {
-    components: {BingoCardComponent}
-}
-</script>
-<script>
-import BingoCardComponent from '../../js/components/BingoCardComponent'
-export default {
-    components: {BingoCardComponent}
-}
-</script>

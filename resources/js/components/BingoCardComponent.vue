@@ -18,7 +18,7 @@
             <tr>
                 <td>{{firstLine[2]}}</td>
                 <td>{{secondLine[2]}}</td>
-                <td>0</td>
+                <td bgcolor="black" style="color: white">0</td>
                 <td>{{fourthLine[2]}}</td>
                 <td>{{fifthLine[2]}}</td>
             </tr>
@@ -58,6 +58,14 @@ export default {
         this.thirdLine = this.getBingoColumn(this.range(31, 45));
         this.fourthLine = this.getBingoColumn(this.range(46, 60));
         this.fifthLine = this.getBingoColumn(this.range(61, 75));
+
+        const tds = document.getElementsByTagName('td');
+        for (let i = 0; i < tds.length; i++) {
+            tds[i].addEventListener('click', event => {
+                event.target.bgColor = 'black';
+                event.target.style.color = 'white';
+            });
+        }
     },
     methods: {
         range(min, max) {

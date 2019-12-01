@@ -1897,9 +1897,16 @@ __webpack_require__.r(__webpack_exports__);
     this.thirdLine = this.getBingoColumn(this.range(31, 45));
     this.fourthLine = this.getBingoColumn(this.range(46, 60));
     this.fifthLine = this.getBingoColumn(this.range(61, 75));
+    var tds = document.getElementsByTagName('td');
+
+    for (var i = 0; i < tds.length; i++) {
+      tds[i].addEventListener('click', function (event) {
+        event.target.bgColor = 'black';
+        event.target.style.color = 'white';
+      });
+    }
   },
   methods: {
-    createBingoCard: function createBingoCard() {},
     range: function range(min, max) {
       return Array.from(Array(max), function (v, k) {
         var num = min + k;
@@ -37348,7 +37355,11 @@ var render = function() {
         _vm._v(" "),
         _c("td", [_vm._v(_vm._s(_vm.secondLine[2]))]),
         _vm._v(" "),
-        _c("td", [_vm._v("0")]),
+        _c(
+          "td",
+          { staticStyle: { color: "white" }, attrs: { bgcolor: "black" } },
+          [_vm._v("0")]
+        ),
         _vm._v(" "),
         _c("td", [_vm._v(_vm._s(_vm.fourthLine[2]))]),
         _vm._v(" "),
