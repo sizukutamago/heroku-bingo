@@ -12,3 +12,5 @@
 */
 
 Route::view('/', 'bingo/index');
+
+Route::view('/bingo', 'bingo/number');
