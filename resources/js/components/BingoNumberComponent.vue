@@ -1,10 +1,20 @@
 <template>
     <div>
-        <p>{{ nowNumber }}</p>
+        <div v-if="nowNumber !== null" class="number"><p>{{ nowNumber }}</p></div>
 
-        <button v-show="!isStarted" @click="startBingo">スタート</button>
-        <button v-show="isStarted" @click="getNextBingoNumber">回す</button>
-        <button v-show="isStarted" @click="endBingo">終わる</button>
+        <div class="issued">
+            <ul>
+                <li  v-for="bingoNumber in bingoNumberList">
+                    {{bingoNumber}}
+                </li>
+            </ul>
+        </div>
+
+        <div class="button">
+            <button v-show="!isStarted" @click="startBingo">スタート</button>
+            <button v-show="isStarted" @click="getNextBingoNumber">回す</button>
+            <!--<button v-show="isStarted" @click="endBingo">終わる</button>-->
+        </div>
     </div>
 </template>
 
@@ -14,7 +24,7 @@ export default {
     data() {
         return {
             isStarted: false,
-            nowNumber: 0,
+            nowNumber: null,
             bingoNumberList: []
         }
     },
@@ -63,5 +73,46 @@ export default {
 </script>
 
 <style scoped>
+.number {
+    text-align: center;
+}
 
+.number p {
+    font-size: 120px;
+    border: medium solid #00bfff;
+    display: inline-block;
+    padding: 50px;
+    margin: 0 auto;
+}
+
+.button {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.button button {
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #67c5ff;
+    border: solid 2px #67c5ff;
+    border-radius: 3px;
+    transition: .4s;
+    font-size: 40px;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul li {
+    color: #67c5ff;
+    padding: 0.5em 2em;
+    border: solid 2px #67c5ff;
+    border-radius: 3px;
+    margin:  10px;
+    align-self: stretch;
+    display: inline-block;
+}
 </style>
