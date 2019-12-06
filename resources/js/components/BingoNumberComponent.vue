@@ -29,21 +29,31 @@ export default {
         }
     },
     mounted() {
-        this.bingoNumberList = JSON.parse(localStorage.getItem('bingoNumberList'));
-        this.bingoNumberObjectList = this.rangeObject();
-        this.isStarted = (this.bingoNumberList != null);
+        this.startBingo();
     },
     methods: {
         startBingo() {
-            this.bingoNumberList = this.range(1, 75);
+            this.nowNumber = localStorage.getItem('nowNumber');
+
+            this.bingoNumberList = JSON.parse(localStorage.getItem('bingoNumberList'));
+            if (!this.bingoNumberList) {
+                this.bingoNumberList = this.range(1, 75);
+            }
+
+            this.bingoNumberObjectList = JSON.parse(localStorage.getItem('bingoNumberObjectList'));
+            console.log(this.bingoNumberObjectList);
+            if (!this.bingoNumberObjectList) {
+                this.bingoNumberObjectList = this.rangeObject();
+            }
+
             localStorage.setItem('bingoNumberList', JSON.stringify(this.bingoNumberList));
+            localStorage.setItem('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
             this.isStarted = true;
-            this.nowNumber = null;
         },
         endBingo() {
-            this.bingoNumberList = null;
+            localStorage.removeItem('nowNumber');
             localStorage.removeItem('bingoNumberList');
-            this.bingoNumberObjectList = this.rangeObject();
+            localStorage.removeItem('bingoNumberObjectList');
             this.isStarted = false;
         },
         range(min, max) {
@@ -70,7 +80,9 @@ export default {
             this.shuffle();
             this.nowNumber = this.bingoNumberList.pop();
             this.bingoNumberObjectList[this.nowNumber - 1].isIssued = true;
-            console.log(this.bingoNumberObjectList);
+            localStorage.setItem('nowNumber', this.nowNumber);
+            localStorage.setItem('bingoNumberList', JSON.stringify(this.bingoNumberList));
+            localStorage.setItem('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
         },
         shuffle() {
             for(let i = this.bingoNumberList.length - 1; i > 0; i--){
