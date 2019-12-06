@@ -4,16 +4,15 @@
 
         <div class="issued">
             <ul>
-                <li  v-for="bingoNumber in bingoNumberList">
-                    {{bingoNumber}}
+                <li v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index">
+                    {{bingoNumberObject.id}}
                 </li>
             </ul>
         </div>
 
         <div class="button">
             <button v-show="!isStarted" @click="startBingo">スタート</button>
-            <button v-show="isStarted" @click="getNextBingoNumber">回す</button>
-            <!--<button v-show="isStarted" @click="endBingo">終わる</button>-->
+            <button v-show="isStarted" @click="getNextBingoNumber">ルーレット！</button>
         </div>
     </div>
 </template>
@@ -25,11 +24,13 @@ export default {
         return {
             isStarted: false,
             nowNumber: null,
-            bingoNumberList: []
+            bingoNumberList: [],
+            bingoNumberObjectList: []
         }
     },
     mounted() {
         this.bingoNumberList = JSON.parse(localStorage.getItem('bingoNumberList'));
+        this.bingoNumberObjectList = this.rangeObject();
         this.isStarted = (this.bingoNumberList != null);
     },
     methods: {
@@ -42,6 +43,7 @@ export default {
         endBingo() {
             this.bingoNumberList = null;
             localStorage.removeItem('bingoNumberList');
+            this.bingoNumberObjectList = this.rangeObject();
             this.isStarted = false;
         },
         range(min, max) {
@@ -52,13 +54,23 @@ export default {
                 return k;
             }).filter(v => v);
         },
+        rangeObject() {
+            let arrayObject = [];
+            for (let i = 1; i < 76; i++) {
+                arrayObject.push({id: i, isIssued: false});
+            }
+
+            return arrayObject;
+        },
         getNextBingoNumber() {
             if (this.bingoNumberList.length === 0) {
-                this.isStarted = false;
+                this.endBingo();
                 return;
             }
             this.shuffle();
             this.nowNumber = this.bingoNumberList.pop();
+            this.bingoNumberObjectList[this.nowNumber - 1].isIssued = true;
+            console.log(this.bingoNumberObjectList);
         },
         shuffle() {
             for(let i = this.bingoNumberList.length - 1; i > 0; i--){
@@ -114,5 +126,10 @@ ul li {
     margin:  10px;
     align-self: stretch;
     display: inline-block;
+}
+
+.square_color {
+    background-color: #67c5ff;
+    color: #fff;
 }
 </style>
