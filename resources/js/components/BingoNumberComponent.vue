@@ -37,13 +37,12 @@ export default {
 
             this.bingoNumberList = JSON.parse(localStorage.getItem('bingoNumberList'));
             if (!this.bingoNumberList) {
-                this.bingoNumberList = this.range(1, 75);
+                this.bingoNumberList = this.createBingoNumberList();
             }
 
             this.bingoNumberObjectList = JSON.parse(localStorage.getItem('bingoNumberObjectList'));
-            console.log(this.bingoNumberObjectList);
             if (!this.bingoNumberObjectList) {
-                this.bingoNumberObjectList = this.rangeObject();
+                this.bingoNumberObjectList = this.createBingoNumberObjectList();
             }
 
             localStorage.setItem('bingoNumberList', JSON.stringify(this.bingoNumberList));
@@ -56,15 +55,15 @@ export default {
             localStorage.removeItem('bingoNumberObjectList');
             this.isStarted = false;
         },
-        range(min, max) {
-            return Array.from(Array(max), (v, k) => {
-                let num = min + k;
-                if (max < num) return null;
+        createBingoNumberList() {
+            return Array.from(Array(75), (v, k) => {
+                let num = 1 + k;
+                if (75 < num) return null;
                 k = num;
                 return k;
             }).filter(v => v);
         },
-        rangeObject() {
+        createBingoNumberObjectList() {
             let arrayObject = [];
             for (let i = 1; i < 76; i++) {
                 arrayObject.push({id: i, isIssued: false});

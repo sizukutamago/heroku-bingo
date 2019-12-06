@@ -2001,14 +2001,13 @@ __webpack_require__.r(__webpack_exports__);
       this.bingoNumberList = JSON.parse(localStorage.getItem('bingoNumberList'));
 
       if (!this.bingoNumberList) {
-        this.bingoNumberList = this.range(1, 75);
+        this.bingoNumberList = this.createBingoNumberList();
       }
 
       this.bingoNumberObjectList = JSON.parse(localStorage.getItem('bingoNumberObjectList'));
-      console.log(this.bingoNumberObjectList);
 
       if (!this.bingoNumberObjectList) {
-        this.bingoNumberObjectList = this.rangeObject();
+        this.bingoNumberObjectList = this.createBingoNumberObjectList();
       }
 
       localStorage.setItem('bingoNumberList', JSON.stringify(this.bingoNumberList));
@@ -2021,17 +2020,17 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.removeItem('bingoNumberObjectList');
       this.isStarted = false;
     },
-    range: function range(min, max) {
-      return Array.from(Array(max), function (v, k) {
-        var num = min + k;
-        if (max < num) return null;
+    createBingoNumberList: function createBingoNumberList() {
+      return Array.from(Array(75), function (v, k) {
+        var num = 1 + k;
+        if (75 < num) return null;
         k = num;
         return k;
       }).filter(function (v) {
         return v;
       });
     },
-    rangeObject: function rangeObject() {
+    createBingoNumberObjectList: function createBingoNumberObjectList() {
       var arrayObject = [];
 
       for (var i = 1; i < 76; i++) {
