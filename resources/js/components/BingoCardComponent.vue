@@ -1,6 +1,9 @@
 <template>
     <div>
-        <table border="1">
+        <header>
+            <img class="bingo-header" src="/img/bingo.jpg"/>
+        </header>
+        <table>
             <tr>
                 <td>{{firstLine[0]}}</td>
                 <td>{{secondLine[0]}}</td>
@@ -18,7 +21,7 @@
             <tr>
                 <td>{{firstLine[2]}}</td>
                 <td>{{secondLine[2]}}</td>
-                <td bgcolor="black" style="color: white">0</td>
+                <td bgcolor="#49c5f0" width="75px" style="color: white; font-size: 17px">bingo!</td>
                 <td>{{fourthLine[2]}}</td>
                 <td>{{fifthLine[2]}}</td>
             </tr>
@@ -62,7 +65,7 @@ export default {
         const tds = document.getElementsByTagName('td');
         for (let i = 0; i < tds.length; i++) {
             tds[i].addEventListener('click', event => {
-                event.target.bgColor = 'black';
+                event.target.style.background = '#49c5f0';
                 event.target.style.color = 'white';
             });
         }
@@ -90,4 +93,21 @@ export default {
 </script>
 
 <style scoped>
+.bingo-header {
+    height: 15vh;
+    width: 100%;
+    margin-bottom: 5vh;
+}
+table{
+    width: 100%;
+    height: 70vh;
+    border-collapse: collapse;
+}
+
+table th,table td{
+    border:solid 2px #49c5f0;
+    text-align: center;
+    height: 10px;
+    font-size: 40px;
+}
 </style>
