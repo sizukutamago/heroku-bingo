@@ -11,6 +11,11 @@
 |
 */
 
-Route::view('/', 'bingo/index');
+Route::view('/bingocard', 'room/index');
 
-Route::view('/bingo', 'bingo/number');
+Route::get('/room/start', 'RoomController@startGame')->name('startGame');
+Route::post('/room', 'RoomController@createRoom')->name('createRoom');
+Route::get('/room/{roomId}', 'RoomController@joinRoom')->name('room');
+
+
+Route::view('/', 'index')->name('index');

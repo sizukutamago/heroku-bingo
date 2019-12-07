@@ -7,6 +7,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.VueQriously = require('vue-qriously');
+Vue.use(VueQriously);
 
 /**
  * The following block of code may be used to automatically register your
