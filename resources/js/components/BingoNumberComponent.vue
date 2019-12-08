@@ -20,12 +20,14 @@
 <script>
 export default {
     name: 'BingoNumberComponent',
+    props: ['roomid'],
     data() {
         return {
             isStarted: false,
             nowNumber: null,
             bingoNumberList: [],
-            bingoNumberObjectList: []
+            bingoNumberObjectList: [],
+            prefix: this.roomid + '_'
         }
     },
     mounted() {
@@ -33,26 +35,26 @@ export default {
     },
     methods: {
         startBingo() {
-            this.nowNumber = localStorage.getItem('nowNumber');
+            this.nowNumber = this.localGet('nowNumber');
 
-            this.bingoNumberList = JSON.parse(localStorage.getItem('bingoNumberList'));
+            this.bingoNumberList = JSON.parse(this.localGet('bingoNumberList'));
             if (!this.bingoNumberList) {
                 this.bingoNumberList = this.createBingoNumberList();
             }
 
-            this.bingoNumberObjectList = JSON.parse(localStorage.getItem('bingoNumberObjectList'));
+            this.bingoNumberObjectList = JSON.parse(this.localGet('bingoNumberObjectList'));
             if (!this.bingoNumberObjectList) {
                 this.bingoNumberObjectList = this.createBingoNumberObjectList();
             }
 
-            localStorage.setItem('bingoNumberList', JSON.stringify(this.bingoNumberList));
-            localStorage.setItem('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
+            this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
+            this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
             this.isStarted = true;
         },
         endBingo() {
-            localStorage.removeItem('nowNumber');
-            localStorage.removeItem('bingoNumberList');
-            localStorage.removeItem('bingoNumberObjectList');
+            this.localRemove('nowNumber');
+            this.localRemove('bingoNumberList');
+            this.localRemove('bingoNumberObjectList');
             this.isStarted = false;
         },
         createBingoNumberList() {
@@ -79,9 +81,9 @@ export default {
             this.shuffle();
             this.nowNumber = this.bingoNumberList.pop();
             this.bingoNumberObjectList[this.nowNumber - 1].isIssued = true;
-            localStorage.setItem('nowNumber', this.nowNumber);
-            localStorage.setItem('bingoNumberList', JSON.stringify(this.bingoNumberList));
-            localStorage.setItem('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
+            this.localSave('nowNumber', this.nowNumber);
+            this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
+            this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
         },
         shuffle() {
             for(let i = this.bingoNumberList.length - 1; i > 0; i--){
@@ -90,6 +92,15 @@ export default {
                 this.bingoNumberList[i] = this.bingoNumberList[r];
                 this.bingoNumberList[r] = tmp;
             }
+        },
+        localSave(key, value) {
+            localStorage.setItem(this.prefix + key, value);
+        },
+        localGet(key) {
+            return localStorage.getItem(this.prefix + key);
+        },
+        localRemove(key) {
+            localStorage.removeItem(this.prefix + key);
         }
     }
 }

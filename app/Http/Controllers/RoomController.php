@@ -22,16 +22,12 @@ class RoomController extends Controller
     public function createRoom() {
         if ($this->roomModel->where('room_id', session('room_id'))->count() === 1) return view('room/confirm');
 
-        $roomId = $this->createRoomId();
-        $this->roomModel->create(['room_id' => $roomId]);
-        session(['room_id' => $roomId]);
-
+        $this->create();
         return view('room/lobby');
     }
 
     public function forceCreateRoom() {
         $this->create();
-
         return view('room/lobby');
     }
 

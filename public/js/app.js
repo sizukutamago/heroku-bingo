@@ -1987,12 +1987,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BingoNumberComponent',
+  props: ['roomid'],
   data: function data() {
     return {
       isStarted: false,
       nowNumber: null,
       bingoNumberList: [],
-      bingoNumberObjectList: []
+      bingoNumberObjectList: [],
+      prefix: this.roomid + '_'
     };
   },
   mounted: function mounted() {
@@ -2000,27 +2002,27 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     startBingo: function startBingo() {
-      this.nowNumber = localStorage.getItem('nowNumber');
-      this.bingoNumberList = JSON.parse(localStorage.getItem('bingoNumberList'));
+      this.nowNumber = this.localGet('nowNumber');
+      this.bingoNumberList = JSON.parse(this.localGet('bingoNumberList'));
 
       if (!this.bingoNumberList) {
         this.bingoNumberList = this.createBingoNumberList();
       }
 
-      this.bingoNumberObjectList = JSON.parse(localStorage.getItem('bingoNumberObjectList'));
+      this.bingoNumberObjectList = JSON.parse(this.localGet('bingoNumberObjectList'));
 
       if (!this.bingoNumberObjectList) {
         this.bingoNumberObjectList = this.createBingoNumberObjectList();
       }
 
-      localStorage.setItem('bingoNumberList', JSON.stringify(this.bingoNumberList));
-      localStorage.setItem('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
+      this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
+      this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
       this.isStarted = true;
     },
     endBingo: function endBingo() {
-      localStorage.removeItem('nowNumber');
-      localStorage.removeItem('bingoNumberList');
-      localStorage.removeItem('bingoNumberObjectList');
+      this.localRemove('nowNumber');
+      this.localRemove('bingoNumberList');
+      this.localRemove('bingoNumberObjectList');
       this.isStarted = false;
     },
     createBingoNumberList: function createBingoNumberList() {
@@ -2054,9 +2056,9 @@ __webpack_require__.r(__webpack_exports__);
       this.shuffle();
       this.nowNumber = this.bingoNumberList.pop();
       this.bingoNumberObjectList[this.nowNumber - 1].isIssued = true;
-      localStorage.setItem('nowNumber', this.nowNumber);
-      localStorage.setItem('bingoNumberList', JSON.stringify(this.bingoNumberList));
-      localStorage.setItem('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
+      this.localSave('nowNumber', this.nowNumber);
+      this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
+      this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
     },
     shuffle: function shuffle() {
       for (var i = this.bingoNumberList.length - 1; i > 0; i--) {
@@ -2065,6 +2067,15 @@ __webpack_require__.r(__webpack_exports__);
         this.bingoNumberList[i] = this.bingoNumberList[r];
         this.bingoNumberList[r] = tmp;
       }
+    },
+    localSave: function localSave(key, value) {
+      localStorage.setItem(this.prefix + key, value);
+    },
+    localGet: function localGet(key) {
+      return localStorage.getItem(this.prefix + key);
+    },
+    localRemove: function localRemove(key) {
+      localStorage.removeItem(this.prefix + key);
     }
   }
 });
