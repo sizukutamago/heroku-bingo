@@ -16,6 +16,7 @@ Route::view('/bingocard', 'room/index');
 Route::get('/room/start', 'RoomController@startGame')->name('startGame');
 Route::post('/room', 'RoomController@createRoom')->name('createRoom');
 Route::get('/room/{roomId}', 'RoomController@joinRoom')->name('room');
+Route::post('/newroom', 'RoomController@forceCreateRoom')->name('forceNewRoom');
 
 
 Route::view('/', 'index')->name('index');

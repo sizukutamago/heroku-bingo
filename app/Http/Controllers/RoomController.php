@@ -20,11 +20,17 @@ class RoomController extends Controller
     }
 
     public function createRoom() {
-        if ($this->roomModel->where('room_id', session('room_id'))->count() === 1) return view('room/lobby');
+        if ($this->roomModel->where('room_id', session('room_id'))->count() === 1) return view('room/confirm');
 
         $roomId = $this->createRoomId();
         $this->roomModel->create(['room_id' => $roomId]);
         session(['room_id' => $roomId]);
+
+        return view('room/lobby');
+    }
+
+    public function forceCreateRoom() {
+        $this->create();
 
         return view('room/lobby');
     }
@@ -36,5 +42,11 @@ class RoomController extends Controller
 
     private function createRoomId(): string {
         return uniqid('', true);
+    }
+
+    private function create() {
+        $roomId = $this->createRoomId();
+        $this->roomModel->create(['room_id' => $roomId]);
+        session(['room_id' => $roomId]);
     }
 }
