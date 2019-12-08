@@ -2,7 +2,7 @@
 
 @section('content')
     @php
-        $route = route('room', ['roomId' => session('room_id')]);
+        $route = route('participantLobby', ['roomId' => session('room_id')]);
     @endphp
 
     <qriously value="{{$route}}"></qriously>

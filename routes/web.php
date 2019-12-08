@@ -11,11 +11,13 @@
 |
 */
 
+Route::get('/participantLobby/{roomId}', 'RoomController@participantLobby')->name('participantLobby');
 Route::view('/bingocard', 'room/index');
 
 Route::get('/room/start', 'RoomController@startGame')->name('startGame');
 Route::post('/room', 'RoomController@createRoom')->name('createRoom');
 Route::get('/room/{roomId}', 'RoomController@joinRoom')->name('room');
+Route::post('/room/{roomId}', 'RoomController@createUser');
 Route::post('/newroom', 'RoomController@forceCreateRoom')->name('forceNewRoom');
 
 
