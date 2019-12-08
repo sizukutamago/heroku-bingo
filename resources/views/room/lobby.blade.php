@@ -8,4 +8,8 @@
     <qriously value="{{$route}}"></qriously>
     <a href="{{ $route }}" target="_blank">{{ $route }}</a>
 
+    <form method="get" action="{{ route('startGame') }}">
+        <button>ビンゴ開始！</button>
+    </form>
+
 @endsection
