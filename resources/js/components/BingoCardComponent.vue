@@ -16,6 +16,7 @@
 <script>
 export default {
     name: 'BingoCardComponent',
+    props: ['roomid'],
     data() {
         return {
             bingoCard: [
@@ -24,11 +25,17 @@ export default {
                 [],
                 [],
                 []
-            ]
+            ],
+            prefix: this.roomid + '_'
         }
     },
     mounted() {
-        this.createBingoCard();
+        const bingoCard = JSON.parse(this.localGet('bingoCard'));
+        if (bingoCard !== null) {
+            this.bingoCard = bingoCard;
+        } else {
+            this.createBingoCard();
+        }
     },
     methods: {
         createBingoCard() {
@@ -48,6 +55,7 @@ export default {
                     }
                 }
             }
+            this.localSave('bingoCard', JSON.stringify(this.bingoCard));
         },
         range(min, max) {
             return this.shuffle(Array.from(Array(max), (v, k) => {
@@ -68,6 +76,13 @@ export default {
         },
         pushColumn(bingoColumn) {
             bingoColumn.isClicked = !bingoColumn.isClicked;
+            this.localSave('bingoCard', JSON.stringify(this.bingoCard));
+        },
+        localSave(key, value) {
+            localStorage.setItem(this.prefix + key, value);
+        },
+        localGet(key) {
+            return localStorage.getItem(this.prefix + key);
         }
     }
 }

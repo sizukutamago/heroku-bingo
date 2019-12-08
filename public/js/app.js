@@ -1877,13 +1877,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BingoCardComponent',
+  props: ['roomid'],
   data: function data() {
     return {
-      bingoCard: [[], [], [], [], []]
+      bingoCard: [[], [], [], [], []],
+      prefix: this.roomid + '_'
     };
   },
   mounted: function mounted() {
-    this.createBingoCard();
+    var bingoCard = JSON.parse(this.localGet('bingoCard'));
+
+    if (bingoCard !== null) {
+      this.bingoCard = bingoCard;
+    } else {
+      this.createBingoCard();
+    }
   },
   methods: {
     createBingoCard: function createBingoCard() {
@@ -1909,6 +1917,8 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       }
+
+      this.localSave('bingoCard', JSON.stringify(this.bingoCard));
     },
     range: function range(min, max) {
       return this.shuffle(Array.from(Array(max), function (v, k) {
@@ -1932,6 +1942,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     pushColumn: function pushColumn(bingoColumn) {
       bingoColumn.isClicked = !bingoColumn.isClicked;
+      this.localSave('bingoCard', JSON.stringify(this.bingoCard));
+    },
+    localSave: function localSave(key, value) {
+      localStorage.setItem(this.prefix + key, value);
+    },
+    localGet: function localGet(key) {
+      return localStorage.getItem(this.prefix + key);
     }
   }
 });
