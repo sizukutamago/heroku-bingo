@@ -1875,74 +1875,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BingoCardComponent',
   data: function data() {
     return {
-      firstLine: [],
-      secondLine: [],
-      thirdLine: [],
-      fourthLine: [],
-      fifthLine: []
+      bingoCard: [[], [], [], [], []]
     };
   },
   mounted: function mounted() {
-    this.firstLine = this.getBingoColumn(this.range(1, 15));
-    this.secondLine = this.getBingoColumn(this.range(16, 30));
-    this.thirdLine = this.getBingoColumn(this.range(31, 45));
-    this.fourthLine = this.getBingoColumn(this.range(46, 60));
-    this.fifthLine = this.getBingoColumn(this.range(61, 75));
-    var tds = document.getElementsByTagName('td');
-
-    for (var i = 0; i < tds.length; i++) {
-      tds[i].addEventListener('click', function (event) {
-        event.target.style.background = '#49c5f0';
-        event.target.style.color = 'white';
-      });
-    }
+    this.createBingoCard();
   },
   methods: {
+    createBingoCard: function createBingoCard() {
+      var lines = [];
+      lines[0] = this.range(1, 15);
+      lines[1] = this.range(16, 30);
+      lines[2] = this.range(31, 45);
+      lines[3] = this.range(46, 60);
+      lines[4] = this.range(61, 75);
+
+      for (var i = 0; i < 5; i++) {
+        for (var y = 0; y < 5; y++) {
+          if (i === 2 && y === 2) {
+            this.bingoCard[i].push({
+              id: 'bingo!',
+              isClicked: true
+            });
+          } else {
+            this.bingoCard[i].push({
+              id: lines[y].pop(),
+              isClicked: false
+            });
+          }
+        }
+      }
+    },
     range: function range(min, max) {
-      return Array.from(Array(max), function (v, k) {
+      return this.shuffle(Array.from(Array(max), function (v, k) {
         var num = min + k;
         if (max < num) return null;
         k = num;
         return k;
       }).filter(function (v) {
         return v;
-      });
+      }));
     },
-    getBingoColumn: function getBingoColumn(array) {
+    shuffle: function shuffle(array) {
       for (var i = array.length - 1; i > 0; i--) {
         var r = Math.floor(Math.random() * (i + 1));
         var tmp = array[i];
@@ -1950,7 +1928,10 @@ __webpack_require__.r(__webpack_exports__);
         array[r] = tmp;
       }
 
-      return array.slice(0, 5);
+      return array;
+    },
+    pushColumn: function pushColumn(bingoColumn) {
+      bingoColumn.isClicked = !bingoColumn.isClicked;
     }
   }
 });
@@ -6625,7 +6606,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bingo-header[data-v-23ca4e89] {\n    height: 15vh;\n    width: 100%;\n    margin-bottom: 5vh;\n}\ntable[data-v-23ca4e89]{\n    width: 100%;\n    height: 70vh;\n    border-collapse: collapse;\n}\ntable th[data-v-23ca4e89],table td[data-v-23ca4e89]{\n    border:solid 2px #49c5f0;\n    text-align: center;\n    height: 10px;\n    font-size: 40px;\n}\n", ""]);
+exports.push([module.i, "\n.bingo-header[data-v-23ca4e89] {\n    height: 15vh;\n    width: 100%;\n    margin-bottom: 5vh;\n}\ntable[data-v-23ca4e89]{\n    width: 100%;\n    height: 70vh;\n    border-collapse: collapse;\n}\ntable th[data-v-23ca4e89],table td[data-v-23ca4e89]{\n    border:solid 2px #49c5f0;\n    text-align: center;\n    height: 10px;\n    width: 20vw;\n}\n.bingo-pushed[data-v-23ca4e89] {\n    background: #49c5f0;\n}\n", ""]);
 
 // exports
 
@@ -38149,74 +38130,36 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("table", [
-      _c("tr", [
-        _c("td", [_vm._v(_vm._s(_vm.firstLine[0]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.secondLine[0]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.thirdLine[0]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.fourthLine[0]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.fifthLine[0]))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("td", [_vm._v(_vm._s(_vm.firstLine[1]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.secondLine[1]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.thirdLine[1]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.fourthLine[1]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.fifthLine[1]))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("td", [_vm._v(_vm._s(_vm.firstLine[2]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.secondLine[2]))]),
-        _vm._v(" "),
-        _c(
-          "td",
-          {
-            staticStyle: { color: "white", "font-size": "17px" },
-            attrs: { bgcolor: "#49c5f0", width: "75px" }
-          },
-          [_vm._v("bingo!")]
-        ),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.fourthLine[2]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.fifthLine[2]))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("td", [_vm._v(_vm._s(_vm.firstLine[3]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.secondLine[3]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.thirdLine[3]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.fourthLine[3]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.fifthLine[3]))])
-      ]),
-      _vm._v(" "),
-      _c("tr", [
-        _c("td", [_vm._v(_vm._s(_vm.firstLine[4]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.secondLine[4]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.thirdLine[4]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.fourthLine[4]))]),
-        _vm._v(" "),
-        _c("td", [_vm._v(_vm._s(_vm.fifthLine[4]))])
-      ])
-    ])
+    _c(
+      "table",
+      _vm._l(_vm.bingoCard, function(columns, index) {
+        return _c(
+          "tr",
+          { key: index },
+          _vm._l(columns, function(column) {
+            return _c(
+              "td",
+              {
+                key: column.id,
+                class: { "bingo-pushed": column.isClicked },
+                on: {
+                  click: function($event) {
+                    return _vm.pushColumn(column)
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n                " + _vm._s(column.id) + "\n            "
+                )
+              ]
+            )
+          }),
+          0
+        )
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = [

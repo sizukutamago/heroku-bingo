@@ -4,40 +4,10 @@
             <img class="bingo-header" src="/img/bingo.jpg"/>
         </header>
         <table>
-            <tr>
-                <td>{{firstLine[0]}}</td>
-                <td>{{secondLine[0]}}</td>
-                <td>{{thirdLine[0]}}</td>
-                <td>{{fourthLine[0]}}</td>
-                <td>{{fifthLine[0]}}</td>
-            </tr>
-            <tr>
-                <td>{{firstLine[1]}}</td>
-                <td>{{secondLine[1]}}</td>
-                <td>{{thirdLine[1]}}</td>
-                <td>{{fourthLine[1]}}</td>
-                <td>{{fifthLine[1]}}</td>
-            </tr>
-            <tr>
-                <td>{{firstLine[2]}}</td>
-                <td>{{secondLine[2]}}</td>
-                <td bgcolor="#49c5f0" width="75px" style="color: white; font-size: 17px">bingo!</td>
-                <td>{{fourthLine[2]}}</td>
-                <td>{{fifthLine[2]}}</td>
-            </tr>
-            <tr>
-                <td>{{firstLine[3]}}</td>
-                <td>{{secondLine[3]}}</td>
-                <td>{{thirdLine[3]}}</td>
-                <td>{{fourthLine[3]}}</td>
-                <td>{{fifthLine[3]}}</td>
-            </tr>
-            <tr>
-                <td>{{firstLine[4]}}</td>
-                <td>{{secondLine[4]}}</td>
-                <td>{{thirdLine[4]}}</td>
-                <td>{{fourthLine[4]}}</td>
-                <td>{{fifthLine[4]}}</td>
+            <tr v-for="(columns, index) in bingoCard" :key="index">
+                <td v-bind:class="{'bingo-pushed': column.isClicked}" @click="pushColumn(column)" v-for="column in columns" :key="column.id">
+                    {{ column.id }}
+                </td>
             </tr>
         </table>
     </div>
@@ -48,45 +18,56 @@ export default {
     name: 'BingoCardComponent',
     data() {
         return {
-            firstLine: [],
-            secondLine: [],
-            thirdLine: [],
-            fourthLine: [],
-            fifthLine: []
+            bingoCard: [
+                [],
+                [],
+                [],
+                [],
+                []
+            ]
         }
     },
     mounted() {
-        this.firstLine = this.getBingoColumn(this.range(1, 15));
-        this.secondLine = this.getBingoColumn(this.range(16, 30));
-        this.thirdLine = this.getBingoColumn(this.range(31, 45));
-        this.fourthLine = this.getBingoColumn(this.range(46, 60));
-        this.fifthLine = this.getBingoColumn(this.range(61, 75));
-
-        const tds = document.getElementsByTagName('td');
-        for (let i = 0; i < tds.length; i++) {
-            tds[i].addEventListener('click', event => {
-                event.target.style.background = '#49c5f0';
-                event.target.style.color = 'white';
-            });
-        }
+        this.createBingoCard();
     },
     methods: {
+        createBingoCard() {
+            let lines = [];
+            lines[0] = this.range(1, 15);
+            lines[1] = this.range(16, 30);
+            lines[2] = this.range(31, 45);
+            lines[3] = this.range(46, 60);
+            lines[4] = this.range(61, 75);
+
+            for (let i = 0; i < 5; i++) {
+                for (let y = 0; y < 5; y++) {
+                    if (i === 2 && y === 2) {
+                        this.bingoCard[i].push({id: 'bingo!', isClicked: true});
+                    } else {
+                        this.bingoCard[i].push({id: lines[y].pop(), isClicked: false});
+                    }
+                }
+            }
+        },
         range(min, max) {
-            return Array.from(Array(max), (v, k) => {
+            return this.shuffle(Array.from(Array(max), (v, k) => {
                 let num = min + k;
                 if (max < num) return null;
                 k = num;
                 return k;
-            }).filter(v => v);
+            }).filter(v => v));
         },
-        getBingoColumn(array) {
+        shuffle(array) {
             for(let i = array.length - 1; i > 0; i--){
                 let r = Math.floor(Math.random() * (i + 1));
                 let tmp = array[i];
                 array[i] = array[r];
                 array[r] = tmp;
             }
-            return array.slice(0, 5);
+            return array;
+        },
+        pushColumn(bingoColumn) {
+            bingoColumn.isClicked = !bingoColumn.isClicked;
         }
     }
 }
@@ -108,6 +89,10 @@ table th,table td{
     border:solid 2px #49c5f0;
     text-align: center;
     height: 10px;
-    font-size: 40px;
+    width: 20vw;
+}
+
+.bingo-pushed {
+    background: #49c5f0;
 }
 </style>
