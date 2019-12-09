@@ -55,11 +55,21 @@ class RoomController extends Controller
         return view('room/number');
     }
 
+    public function reachNotification(Request $request, string $roomId) {
+        $room = $this->roomModel->where('room_id', $roomId)->get()->first();
+        if ($room === null) return ['status' => 401, 'message' => 'not found room'];
+        $participant = $this->participantModel->where('room_id', $room->id)->where('username', $request->username)->get()->first();
+        if ($participant === null) return ['status' => 401, 'message' => 'not found user'];
+        $participant->is_reach = $request->isReach === 'true';
+        $participant->save();
+        return ['status' => 200, 'message' => 'OK'];
+    }
+
     private function createRoomId(): string {
         return uniqid('', true);
     }
 
-    private function create() {
+    private function create(): void {
         $roomId = $this->createRoomId();
         $this->roomModel->create(['room_id' => $roomId]);
         session(['room_id' => $roomId]);

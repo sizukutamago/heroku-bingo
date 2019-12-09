@@ -16,6 +16,7 @@ class CreateParticipantsTable extends Migration
         Schema::create('participants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('username');
+            $table->boolean('is_reach')->default(false);
             $table->unsignedBigInteger('room_id');
 
             $table->foreign('room_id')->references('id')->on('rooms');

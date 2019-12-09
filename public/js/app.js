@@ -1947,8 +1947,11 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       bingoColumn.isClicked = !bingoColumn.isClicked;
-      this.localSave('bingoCard', JSON.stringify(this.bingoCard));
-      console.log(this.checkReach());
+      this.localSave('bingoCard', JSON.stringify(this.bingoCard)); //todo: reachの状態が変わった時だけ投げるようにする
+
+      axios.get('/room/' + this.roomid + '/reach?isReach=' + this.checkReach() + '&username=' + this.username).then(function (response) {
+        console.log(response);
+      });
     },
     checkReach: function checkReach() {
       // 横チェック
