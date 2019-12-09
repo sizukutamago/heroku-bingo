@@ -20,22 +20,27 @@ class RoomController extends Controller
 
     public function participantLobby(string $roomId) {
         if ($this->roomModel->where('room_id', $roomId)->count() !== 1) return redirect(route('index'));
+        if (session($roomId . '_username')) return redirect(route('room', $roomId));
         return view('room/participantLobby', ['roomId' => $roomId]);
     }
 
     public function createUser(Request $request, string $roomId) {
         $room = $this->roomModel->where('room_id', $roomId)->get()->first();
         if (is_null($room)) return redirect(route('index'));
-        //roomにuserは一意
+        //todo: roomにuserは一意
         $this->participantModel->create(['username' => $request->username, 'room_id' => $room->id]);
-        session(['username' => $request->username]);
+        session([$roomId . '_username' => $request->username]);
         return redirect(route('room', $roomId));
     }
 
     public function joinRoom(string $roomId) {
-        if ($this->roomModel->where('room_id', $roomId)->count() !== 1) return redirect(route('index'));
-        // todo: usernameとroomidでwhereして存在しなければリダイレクト
-        return view('room/index', ['roomId' => $roomId]);
+        $username = session($roomId . '_username');
+        if (!$username) return redirect(route('participantLobby', ['roomId' => $roomId]));
+        $room = $this->roomModel->where('room_id', $roomId)->get()->first();
+        if (!$room) return redirect(route('index'));
+        if ($this->participantModel->where('room_id', $room->id)->where('username', $username)->count() !== 1) return redirect(route('index'));
+
+        return view('room/index', compact('roomId', 'username'));
     }
 
     public function createRoom() {
