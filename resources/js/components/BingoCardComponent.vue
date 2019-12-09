@@ -79,8 +79,52 @@ export default {
             return array;
         },
         pushColumn(bingoColumn) {
+            if (bingoColumn.id === 'bingo!') {
+                return;
+            }
+
             bingoColumn.isClicked = !bingoColumn.isClicked;
             this.localSave('bingoCard', JSON.stringify(this.bingoCard));
+            console.log(this.checkReach());
+        },
+        checkReach() {
+            // 横チェック
+            for (let i = 0; i < this.bingoCard.length; i++) {
+                let count = 0;
+                for (let y = 0; y < this.bingoCard[i].length; y++) {
+                    if (this.bingoCard[i][y].isClicked) count++;
+                }
+                if (count === 4) {
+                    return true;
+                }
+            }
+
+            //縦チェック
+            for (let i = 0; i < this.bingoCard.length; i++) {
+                let count = 0;
+                for (let y = 0; y < this.bingoCard[i].length; y++) {
+                    if (this.bingoCard[y][i].isClicked) count++;
+                }
+                if (count === 4) {
+                    return true;
+                }
+            }
+
+            // 左上から右下にかけて
+            let count = 0;
+            for (let i = 0; i < this.bingoCard.length; i++) {
+                if (this.bingoCard[i][i].isClicked) count++;
+            }
+
+            if (count === 4) return true;
+
+            // 右上から左下にかけて
+            count = 0;
+            for (let i = 0; i < this.bingoCard.length; i++) {
+                if (this.bingoCard[i][(4 - i)].isClicked) count++;
+            }
+
+            return count === 4;
         },
         localSave(key, value) {
             localStorage.setItem(this.prefix + key, value);

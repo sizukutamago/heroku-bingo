@@ -1942,8 +1942,57 @@ __webpack_require__.r(__webpack_exports__);
       return array;
     },
     pushColumn: function pushColumn(bingoColumn) {
+      if (bingoColumn.id === 'bingo!') {
+        return;
+      }
+
       bingoColumn.isClicked = !bingoColumn.isClicked;
       this.localSave('bingoCard', JSON.stringify(this.bingoCard));
+      console.log(this.checkReach());
+    },
+    checkReach: function checkReach() {
+      // 横チェック
+      for (var i = 0; i < this.bingoCard.length; i++) {
+        var _count = 0;
+
+        for (var y = 0; y < this.bingoCard[i].length; y++) {
+          if (this.bingoCard[i][y].isClicked) _count++;
+        }
+
+        if (_count === 4) {
+          return true;
+        }
+      } //縦チェック
+
+
+      for (var _i = 0; _i < this.bingoCard.length; _i++) {
+        var _count2 = 0;
+
+        for (var _y = 0; _y < this.bingoCard[_i].length; _y++) {
+          if (this.bingoCard[_y][_i].isClicked) _count2++;
+        }
+
+        if (_count2 === 4) {
+          return true;
+        }
+      } // 左上から右下にかけて
+
+
+      var count = 0;
+
+      for (var _i2 = 0; _i2 < this.bingoCard.length; _i2++) {
+        if (this.bingoCard[_i2][_i2].isClicked) count++;
+      }
+
+      if (count === 4) return true; // 右上から左下にかけて
+
+      count = 0;
+
+      for (var _i3 = 0; _i3 < this.bingoCard.length; _i3++) {
+        if (this.bingoCard[_i3][4 - _i3].isClicked) count++;
+      }
+
+      return count === 4;
     },
     localSave: function localSave(key, value) {
       localStorage.setItem(this.prefix + key, value);
