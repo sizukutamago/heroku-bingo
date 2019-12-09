@@ -2036,6 +2036,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BingoNumberComponent',
   props: ['roomid'],
@@ -2045,11 +2056,14 @@ __webpack_require__.r(__webpack_exports__);
       nowNumber: null,
       bingoNumberList: [],
       bingoNumberObjectList: [],
-      prefix: this.roomid + '_'
+      prefix: this.roomid + '_',
+      participants: this.getParticipants() //todo: リーチを非同期で常に取得
+
     };
   },
   mounted: function mounted() {
     this.startBingo();
+    this.getParticipants();
   },
   methods: {
     startBingo: function startBingo() {
@@ -2110,6 +2124,13 @@ __webpack_require__.r(__webpack_exports__);
       this.localSave('nowNumber', this.nowNumber);
       this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
       this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
+    },
+    getParticipants: function getParticipants() {
+      var _this = this;
+
+      axios.get('/room/' + this.roomid + '/participants').then(function (response) {
+        _this.participants = response.data;
+      });
     },
     shuffle: function shuffle() {
       for (var i = this.bingoNumberList.length - 1; i > 0; i--) {
@@ -38269,6 +38290,21 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c(
+      "ul",
+      _vm._l(_vm.participants, function(participant, index) {
+        return _c("li", { key: index }, [
+          _vm._v(
+            "\n            " + _vm._s(participant.username) + "\n            "
+          ),
+          participant.is_reach
+            ? _c("p", [_vm._v("\n                リーチ！\n            ")])
+            : _c("p", [_vm._v("\n                ノーリーチ\n            ")])
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
     _vm.nowNumber !== null
       ? _c("div", { staticClass: "number" }, [
           _c("p", [_vm._v(_vm._s(_vm.nowNumber))])

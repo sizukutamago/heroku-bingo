@@ -19,6 +19,7 @@ Route::post('/room', 'RoomController@createRoom')->name('createRoom');
 Route::get('/room/{roomId}', 'RoomController@joinRoom')->name('room');
 Route::post('/room/{roomId}', 'RoomController@createUser');
 Route::get('/room/{roomId}/reach', 'RoomController@reachNotification')->name('reachNotification');
+Route::get('/room/{roomId}/participants', 'RoomController@getParticipants')->name('getParticipants');
 Route::post('/newroom', 'RoomController@forceCreateRoom')->name('forceNewRoom');
 
 

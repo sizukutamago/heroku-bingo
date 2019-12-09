@@ -1,5 +1,16 @@
 <template>
     <div>
+        <ul>
+            <li v-for="(participant, index) in participants" :key="index">
+                {{participant.username}}
+                <p v-if="participant.is_reach">
+                    リーチ！
+                </p>
+                <p v-else>
+                    ノーリーチ
+                </p>
+            </li>
+        </ul>
         <div v-if="nowNumber !== null" class="number"><p>{{ nowNumber }}</p></div>
 
         <div class="issued">
@@ -27,11 +38,14 @@ export default {
             nowNumber: null,
             bingoNumberList: [],
             bingoNumberObjectList: [],
-            prefix: this.roomid + '_'
+            prefix: this.roomid + '_',
+            participants: this.getParticipants()
+            //todo: リーチを非同期で常に取得
         }
     },
     mounted() {
         this.startBingo();
+        this.getParticipants();
     },
     methods: {
         startBingo() {
@@ -84,6 +98,11 @@ export default {
             this.localSave('nowNumber', this.nowNumber);
             this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
             this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
+        },
+        getParticipants() {
+            axios.get('/room/' + this.roomid + '/participants').then(response => {
+                this.participants = response.data;
+            });
         },
         shuffle() {
             for(let i = this.bingoNumberList.length - 1; i > 0; i--){

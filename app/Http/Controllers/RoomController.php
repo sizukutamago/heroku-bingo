@@ -65,6 +65,12 @@ class RoomController extends Controller
         return ['status' => 200, 'message' => 'OK'];
     }
 
+    public function getParticipants(string $roomId) {
+        $room = $this->roomModel->with('participants')->where('room_id', $roomId)->get()->first();
+        if ($room === null) return [];
+        return $room->participants;
+    }
+
     private function createRoomId(): string {
         return uniqid('', true);
     }
