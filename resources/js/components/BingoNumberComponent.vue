@@ -39,13 +39,12 @@ export default {
             bingoNumberList: [],
             bingoNumberObjectList: [],
             prefix: this.roomid + '_',
-            participants: this.getParticipants()
-            //todo: リーチを非同期で常に取得
+            participants: []
         }
     },
     mounted() {
         this.startBingo();
-        this.getParticipants();
+        setInterval(this.getParticipants, 5000);
     },
     methods: {
         startBingo() {
@@ -101,6 +100,7 @@ export default {
         },
         getParticipants() {
             axios.get('/room/' + this.roomid + '/participants').then(response => {
+                console.log(response.data);
                 this.participants = response.data;
             });
         },

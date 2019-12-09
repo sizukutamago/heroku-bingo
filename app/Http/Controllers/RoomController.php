@@ -26,7 +26,7 @@ class RoomController extends Controller
     public function createUser(Request $request, string $roomId) {
         $room = $this->roomModel->where('room_id', $roomId)->get()->first();
         if (is_null($room)) return redirect(route('index'));
-
+        //roomにuserは一意
         $this->participantModel->create(['username' => $request->username, 'room_id' => $room->id]);
         session(['username' => $request->username]);
         return redirect(route('room', $roomId));

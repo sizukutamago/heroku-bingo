@@ -2057,13 +2057,12 @@ __webpack_require__.r(__webpack_exports__);
       bingoNumberList: [],
       bingoNumberObjectList: [],
       prefix: this.roomid + '_',
-      participants: this.getParticipants() //todo: リーチを非同期で常に取得
-
+      participants: []
     };
   },
   mounted: function mounted() {
     this.startBingo();
-    this.getParticipants();
+    setInterval(this.getParticipants, 5000);
   },
   methods: {
     startBingo: function startBingo() {
@@ -2129,6 +2128,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/room/' + this.roomid + '/participants').then(function (response) {
+        console.log(response.data);
         _this.participants = response.data;
       });
     },
