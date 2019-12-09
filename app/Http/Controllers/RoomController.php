@@ -28,6 +28,7 @@ class RoomController extends Controller
         $room = $this->roomModel->where('room_id', $roomId)->get()->first();
         if (is_null($room)) return redirect(route('index'));
         //todo: roomにuserは一意
+        // todo: ユーザ一覧とかの管理画面作る
         $this->participantModel->create(['username' => $request->username, 'room_id' => $room->id]);
         session([$roomId . '_username' => $request->username]);
         return redirect(route('room', $roomId));
