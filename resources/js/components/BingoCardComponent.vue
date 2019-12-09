@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p>{{username}}</p>
         <header>
             <img class="bingo-header" src="/img/bingo.jpg"/>
         </header>
@@ -16,7 +17,10 @@
 <script>
 export default {
     name: 'BingoCardComponent',
-    props: ['roomid'],
+    props: [
+        'roomid',
+        'username'
+    ],
     data() {
         return {
             bingoCard: [

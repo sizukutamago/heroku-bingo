@@ -35,7 +35,7 @@ class RoomController extends Controller
     public function joinRoom(string $roomId) {
         if ($this->roomModel->where('room_id', $roomId)->count() !== 1) return redirect(route('index'));
         // todo: usernameとroomidでwhereして存在しなければリダイレクト
-        return view('room/index');
+        return view('room/index', ['roomId' => $roomId]);
     }
 
     public function createRoom() {
