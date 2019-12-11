@@ -1,16 +1,5 @@
 <template>
     <div>
-        <ul>
-            <li v-for="(participant, index) in participants" :key="index">
-                {{participant.username}}
-                <p v-if="participant.is_reach">
-                    リーチ！
-                </p>
-                <p v-else>
-                    ノーリーチ
-                </p>
-            </li>
-        </ul>
         <div v-if="nowNumber !== null" class="number"><p>{{ nowNumber }}</p></div>
 
         <div class="issued">
@@ -44,7 +33,6 @@ export default {
     },
     mounted() {
         this.startBingo();
-        setInterval(this.getParticipants, 5000);
     },
     methods: {
         startBingo() {

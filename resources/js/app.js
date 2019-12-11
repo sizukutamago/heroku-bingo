@@ -23,6 +23,7 @@ Vue.use(VueQriously);
 
 Vue.component('bingo-card-component', require('./components/BingoCardComponent.vue').default);
 Vue.component('bingo-number-component', require('./components/BingoNumberComponent.vue').default);
+Vue.component('bingo-participant-component', require('./components/BingoParticipant.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

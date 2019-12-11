@@ -8,8 +8,11 @@
     <qriously value="{{$route}}"></qriously>
     <a href="{{ $route }}" target="_blank">{{ $route }}</a>
 
-    <form method="get" action="{{ route('startGame') }}">
+    <form method="get" action="{{ route('startGame') }}" target="_blank">
         <button>ビンゴ開始！</button>
     </form>
+
+    <bingo-participant-component roomid="{{session('room_id')}}"></bingo-participant-component>
+
 
 @endsection
