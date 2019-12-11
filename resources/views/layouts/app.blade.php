@@ -10,7 +10,7 @@
     </head>
     <body>
         <header>
-            <p>binbinbingo!</p>
+            <p><a class="top-link" href="{{ route('index') }}">binbinbingo!</a></p>
         </header>
 
         <div id="app" class="center">
