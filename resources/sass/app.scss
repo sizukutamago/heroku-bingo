@@ -4,6 +4,51 @@
 // Variables
 @import 'variables';
 
+@import "~normalize.css";
+
+#app {
+    font-family: sans-serif;
+}
+
+header {
+    height: 75px;
+    width: 100vw;
+    background-color: #67c5ff;
+    color: white;
+    margin-bottom: 50px;
+}
+
+header p {
+    line-height: 75px;
+    float: left;
+    font-size: 30px;
+    margin: 0 auto;
+}
+
 .center {
     text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    text-align: left;
+    border: 2px solid #67c5ff;
+    font-size: 16px;
+    color: #67c5ff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: .4s;
+    margin-top: 50px;
+}
+
+.btn:hover {
+    background-color: #67c5ff;
+    border-color: #67c5ff;
+    color: #FFF;
+}
+
+.qr {
+    margin-bottom: 50px;
 }

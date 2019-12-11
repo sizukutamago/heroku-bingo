@@ -2164,6 +2164,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BingoParticipant',
   props: ['roomid'],
@@ -6770,7 +6771,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nul[data-v-102d8022] {\n    display: -webkit-box;\n    display: flex;\n    flex-wrap: wrap;\n}\nul li[data-v-102d8022] {\n    color: #67c5ff;\n    padding: 0.5em 2em;\n    border: solid 2px #67c5ff;\n    border-radius: 3px;\n    margin:  10px;\n    align-self: stretch;\n    display: inline-block;\n}\n", ""]);
+exports.push([module.i, "\nul[data-v-102d8022] {\n    padding: 0;\n}\nul li[data-v-102d8022] {\n    color: #67c5ff;\n    list-style: none;\n    padding: 0;\n    display: block;\n}\n.inline[data-v-102d8022] {\n    display: inline;\n}\n", ""]);
 
 // exports
 
@@ -38458,6 +38459,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("h2", [_vm._v("参加者")]),
+    _vm._v(" "),
     _c(
       "ul",
       _vm._l(_vm.participants, function(participant, index) {
@@ -38466,7 +38469,9 @@ var render = function() {
             "\n            " + _vm._s(participant.username) + "\n            "
           ),
           participant.is_reach
-            ? _c("p", [_vm._v("\n                リーチ！\n            ")])
+            ? _c("p", { staticClass: "inline" }, [
+                _vm._v("\n                リーチ！\n            ")
+              ])
             : _vm._e()
         ])
       }),

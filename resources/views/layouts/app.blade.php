@@ -9,6 +9,10 @@
         <title>heroku bingo!</title>
     </head>
     <body>
+        <header>
+            <p>binbinbingo!</p>
+        </header>
+
         <div id="app" class="center">
             @yield('content')
         </div>

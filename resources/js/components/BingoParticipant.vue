@@ -1,9 +1,10 @@
 <template>
     <div>
+        <h2>参加者</h2>
         <ul>
             <li v-for="(participant, index) in participants" :key="index">
                 {{participant.username}}
-                <p v-if="participant.is_reach">
+                <p class="inline" v-if="participant.is_reach">
                     リーチ！
                 </p>
             </li>
@@ -36,17 +37,17 @@ export default {
 
 <style scoped>
 ul {
-    display: flex;
-    flex-wrap: wrap;
+    padding: 0;
 }
 
 ul li {
     color: #67c5ff;
-    padding: 0.5em 2em;
-    border: solid 2px #67c5ff;
-    border-radius: 3px;
-    margin:  10px;
-    align-self: stretch;
-    display: inline-block;
+    list-style: none;
+    padding: 0;
+    display: block;
+}
+
+.inline {
+    display: inline;
 }
 </style>

@@ -5,6 +5,6 @@
     <a href="{{ route('startGame') }}">前回作成したルームに入る</a>
     <form method="post" action="{{ route('forceNewRoom') }}">
         @csrf
-        <button>新しく作成する</button>
+        <button class="btn">新しく作成する</button>
     </form>
 @endsection

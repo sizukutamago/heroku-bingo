@@ -5,11 +5,11 @@
         $route = route('participantLobby', ['roomId' => session('room_id')]);
     @endphp
 
-    <qriously value="{{$route}}"></qriously>
-    <a href="{{ $route }}" target="_blank">{{ $route }}</a>
+    <qriously class="qr" value="{{$route}}" size="400" ></qriously>
+    <a class="qr" href="{{ $route }}" target="_blank">{{ $route }}</a>
 
     <form method="get" action="{{ route('startGame') }}" target="_blank">
-        <button>ビンゴ開始！</button>
+        <button class="btn">ビンゴ開始！</button>
     </form>
 
     <bingo-participant-component roomid="{{session('room_id')}}"></bingo-participant-component>
