@@ -9,7 +9,7 @@
         <title>heroku bingo!</title>
     </head>
     <body>
-        <div id="app">
+        <div id="app" class="center">
             @yield('content')
         </div>
 
