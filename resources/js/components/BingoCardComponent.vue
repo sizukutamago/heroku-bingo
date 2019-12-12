@@ -1,8 +1,8 @@
 <template>
     <div>
-        <p>{{username}}</p>
         <header>
             <img class="bingo-header" src="/img/bingo.jpg"/>
+            <p>{{username}}</p>
         </header>
         <table>
             <tr v-for="(columns, index) in bingoCard" :key="index">
@@ -140,10 +140,14 @@ export default {
 </script>
 
 <style scoped>
+header p {
+    float: right;
+    margin-right: 10px;
+}
+
 .bingo-header {
     height: 15vh;
     width: 100%;
-    margin-bottom: 5vh;
 }
 table{
     width: 100%;
