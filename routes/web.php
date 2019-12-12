@@ -15,6 +15,7 @@ Route::get('/participantLobby/{roomId}', 'RoomController@participantLobby')->nam
 Route::view('/bingocard', 'room/index');
 
 Route::get('/room/start', 'RoomController@startGame')->name('startGame');
+Route::get('/room/return', 'RoomController@returnRoom')->name('returnRoom');
 Route::post('/room', 'RoomController@createRoom')->name('createRoom');
 Route::get('/room/{roomId}', 'RoomController@joinRoom')->name('room');
 Route::post('/room/{roomId}', 'RoomController@createUser');

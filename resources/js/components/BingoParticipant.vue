@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>参加者</h2>
+        <h2>参加者 {{ participants.length }}人</h2>
         <ul>
             <li v-for="(participant, index) in participants" :key="index">
                 {{participant.username}}

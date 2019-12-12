@@ -55,6 +55,12 @@ class RoomController extends Controller
         return view('room/lobby');
     }
 
+    public function returnRoom() {
+        if ($this->roomModel->where('room_id', session('room_id'))->count() !== 1) return redirect(route('index'));
+
+        return view('room/lobby');
+    }
+
     public function forceCreateRoom() {
         $this->create();
         return view('room/lobby');
