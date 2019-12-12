@@ -32,7 +32,6 @@ class RoomController extends Controller
             return redirect(route('participantLobby', ['roomId' => $roomId]))->with('error', 'このニックネームはすでに使われています。');
         }
         // todo: ユーザ一覧とかの管理画面作る
-        // todo: すでにルームが存在しますからのQRコードの画面遷移を作る
         $this->participantModel->create(['username' => $request->username, 'room_id' => $room->id]);
         session([$roomId . '_username' => $request->username]);
         return redirect(route('room', $roomId));
