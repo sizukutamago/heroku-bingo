@@ -2,7 +2,8 @@
 
 @section('content')
     @php
-        $route = route('participantLobby', ['roomId' => session('room_id')]);
+        $roomId = session('room_id');
+        $route = route('participantLobby', ['roomId' => $roomId]);
     @endphp
 
     <qriously class="qr" value="{{$route}}" size="400" ></qriously>
@@ -12,7 +13,7 @@
         <button class="btn">ビンゴ開始！</button>
     </form>
 
-    <bingo-participant-component roomid="{{session('room_id')}}"></bingo-participant-component>
+    <bingo-participant-component roomid="{{$roomId}}"></bingo-participant-component>
 
 
 @endsection
