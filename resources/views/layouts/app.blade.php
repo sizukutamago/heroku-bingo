@@ -9,8 +9,8 @@
         <title>heroku bingo!</title>
     </head>
     <body>
-        <header>
-            <p><a class="top-link" href="{{ route('index') }}">binbinbingo!</a></p>
+        <header class="header">
+            <p class="header-title"><a class="top-link" href="{{ route('index') }}">binbinbingo!</a></p>
         </header>
 
         <div id="app" class="center">

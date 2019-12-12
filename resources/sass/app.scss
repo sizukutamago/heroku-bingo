@@ -10,7 +10,7 @@
     font-family: sans-serif;
 }
 
-header {
+.header {
     height: 75px;
     width: 100vw;
     background-color: #67c5ff;
@@ -18,7 +18,7 @@ header {
     margin-bottom: 50px;
 }
 
-header p {
+.header .header-title {
     line-height: 75px;
     float: left;
     font-size: 30px;
