@@ -3,14 +3,17 @@
         <div v-if="nowNumber !== null" class="number"><p>{{ nowNumber }}</p></div>
 
         <div class="issued">
-            <table>
-                <tr>
-                    <td v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index">
-                        {{bingoNumberObject.id}}
-                    </td>
-                </tr>
-            </table>
+            <ul>
+                <li v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index">
+                    {{bingoNumberObject.id}}
+                </li>
+            </ul>
         </div>
+
+        <!--
+        todo: liをtableにする
+        todo: nowNumberをランダムアニメーションにする
+        -->
 
         <div class="button">
             <button v-show="!isStarted" @click="startBingo">スタート</button>
