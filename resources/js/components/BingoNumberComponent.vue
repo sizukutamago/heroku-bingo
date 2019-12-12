@@ -3,11 +3,13 @@
         <div v-if="nowNumber !== null" class="number"><p>{{ nowNumber }}</p></div>
 
         <div class="issued">
-            <ul>
-                <li v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index">
-                    {{bingoNumberObject.id}}
-                </li>
-            </ul>
+            <table>
+                <tr>
+                    <td v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index">
+                        {{bingoNumberObject.id}}
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <div class="button">

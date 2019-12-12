@@ -2036,6 +2036,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BingoNumberComponent',
   props: ['roomid'],
@@ -38382,23 +38384,28 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "issued" }, [
-      _c(
-        "ul",
-        _vm._l(_vm.bingoNumberObjectList, function(bingoNumberObject, index) {
-          return _c(
-            "li",
-            { key: index, class: { square_color: bingoNumberObject.isIssued } },
-            [
-              _vm._v(
-                "\n                " +
-                  _vm._s(bingoNumberObject.id) +
-                  "\n            "
-              )
-            ]
-          )
-        }),
-        0
-      )
+      _c("table", [
+        _c(
+          "tr",
+          _vm._l(_vm.bingoNumberObjectList, function(bingoNumberObject, index) {
+            return _c(
+              "td",
+              {
+                key: index,
+                class: { square_color: bingoNumberObject.isIssued }
+              },
+              [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(bingoNumberObject.id) +
+                    "\n                "
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "button" }, [
