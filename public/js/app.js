@@ -2062,15 +2062,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BingoNumberComponent',
   props: ['roomid'],
   data: function data() {
     return {
       isStarted: false,
-      nowNumber: null,
+      nowNumber: 0,
+      randomNumber: 0,
+      isRandom: false,
       bingoNumberList: [],
       bingoNumberObjectList: [],
       prefix: this.roomid + '_',
@@ -2083,6 +2083,11 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     startBingo: function startBingo() {
       this.nowNumber = this.localGet('nowNumber');
+
+      if (this.nowNumber === null) {
+        this.nowNumber = 0;
+      }
+
       this.bingoNumberList = JSON.parse(this.localGet('bingoNumberList'));
 
       if (!this.bingoNumberList) {
@@ -2133,12 +2138,9 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
+      this.isRandom = true;
       this.shuffle();
-      this.nowNumber = this.bingoNumberList.pop();
-      this.bingoNumberObjectList[this.nowNumber - 1].isIssued = true;
-      this.localSave('nowNumber', this.nowNumber);
-      this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
-      this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
+      this.shuffleLoop(75, 0);
     },
     getParticipants: function getParticipants() {
       var _this = this;
@@ -2154,6 +2156,23 @@ __webpack_require__.r(__webpack_exports__);
         var tmp = this.bingoNumberList[i];
         this.bingoNumberList[i] = this.bingoNumberList[r];
         this.bingoNumberList[r] = tmp;
+      }
+    },
+    shuffleLoop: function shuffleLoop(maxCount, i) {
+      var _this2 = this;
+
+      if (i <= maxCount) {
+        this.randomNumber = Math.floor(Math.random() * this.bingoNumberList.length);
+        setTimeout(function () {
+          _this2.shuffleLoop(maxCount, ++i);
+        }, 10);
+      } else {
+        this.nowNumber = this.bingoNumberList.pop();
+        this.bingoNumberObjectList[this.nowNumber - 1].isIssued = true;
+        this.isRandom = false;
+        this.localSave('nowNumber', this.nowNumber);
+        this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
+        this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
       }
     },
     localSave: function localSave(key, value) {
@@ -6780,7 +6799,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.number[data-v-7e32b9f0] {\n    text-align: center;\n    color: #420098;\n}\n.number p[data-v-7e32b9f0] {\n    font-size: 180px;\n    border: medium solid #420098;\n    display: inline-block;\n    padding: 50px;\n    margin: 0 auto;\n    font-weight: 900;\n}\n.button[data-v-7e32b9f0] {\n    text-align: center;\n    margin-top: 10px;\n}\n.button button[data-v-7e32b9f0] {\n    display: inline-block;\n    padding: 0.3em 1em;\n    text-decoration: none;\n    color: #420098;\n    border: solid 2px #420098;\n    border-radius: 3px;\n    -webkit-transition: .4s;\n    transition: .4s;\n    font-size: 40px;\n}\ntable[data-v-7e32b9f0] {\n    width: 100vw;\n    height: 48vh;\n    border-collapse: collapse;\n    margin-top: 10px;\n}\ntable th[data-v-7e32b9f0]{\n    border:solid 1px #420098;\n    text-align: center;\n    padding: 10px 0;\n    font-size: 60px;\n    font-weight: bold;\n    color: #420098;\n}\n.square_color[data-v-7e32b9f0] {\n    background-color: #420098;\n    color: #fff;\n}\n", ""]);
+exports.push([module.i, "\n.number[data-v-7e32b9f0] {\n    text-align: center;\n    color: #420098;\n}\n.number p[data-v-7e32b9f0] {\n    font-size: 180px;\n    border: medium solid #420098;\n    display: inline-block;\n    padding: 50px;\n    margin: 0 auto;\n    font-weight: 900;\n    width: 50vw;\n    box-sizing: border-box;\n}\n.button[data-v-7e32b9f0] {\n    text-align: center;\n    margin-top: 10px;\n}\n.button button[data-v-7e32b9f0] {\n    display: inline-block;\n    padding: 0.3em 1em;\n    text-decoration: none;\n    color: #420098;\n    border: solid 2px #420098;\n    border-radius: 3px;\n    -webkit-transition: .4s;\n    transition: .4s;\n    font-size: 40px;\n}\ntable[data-v-7e32b9f0] {\n    width: 100vw;\n    height: 48vh;\n    border-collapse: collapse;\n    margin-top: 10px;\n}\ntable th[data-v-7e32b9f0]{\n    border:solid 1px #420098;\n    text-align: center;\n    padding: 10px 0;\n    font-size: 60px;\n    font-weight: bold;\n    color: #420098;\n}\n.square_color[data-v-7e32b9f0] {\n    background-color: #420098;\n    color: #fff;\n}\n", ""]);
 
 // exports
 
@@ -38399,11 +38418,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.nowNumber !== null
-      ? _c("div", { staticClass: "number" }, [
-          _c("p", [_vm._v(_vm._s(_vm.nowNumber))])
-        ])
-      : _vm._e(),
+    _c("div", { staticClass: "number" }, [
+      !_vm.isRandom ? _c("p", [_vm._v(_vm._s(_vm.nowNumber))]) : _vm._e(),
+      _vm._v(" "),
+      _vm.isRandom ? _c("p", [_vm._v(_vm._s(_vm.randomNumber))]) : _vm._e()
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "issued" }, [
       _c("table", { attrs: { border: "1" } }, [
@@ -38552,6 +38571,7 @@ var render = function() {
               expression: "isStarted"
             }
           ],
+          attrs: { disabled: _vm.isRandom },
           on: { click: _vm.getNextBingoNumber }
         },
         [_vm._v("ルーレット！")]

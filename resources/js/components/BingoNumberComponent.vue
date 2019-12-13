@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div v-if="nowNumber !== null" class="number"><p>{{ nowNumber }}</p></div>
+        <div class="number">
+            <p v-if="!isRandom">{{ nowNumber }}</p>
+            <p v-if="isRandom">{{ randomNumber }}</p>
+        </div>
 
         <div class="issued">
             <table border="1">
@@ -32,14 +35,9 @@
             </table>
         </div>
 
-        <!--
-        todo: liをtableにする
-        todo: nowNumberをランダムアニメーションにする
-        -->
-
         <div class="button">
             <button v-show="!isStarted" @click="startBingo">スタート</button>
-            <button v-show="isStarted" @click="getNextBingoNumber">ルーレット！</button>
+            <button v-show="isStarted" @click="getNextBingoNumber" v-bind:disabled="isRandom">ルーレット！</button>
         </div>
     </div>
 </template>
@@ -51,7 +49,9 @@ export default {
     data() {
         return {
             isStarted: false,
-            nowNumber: null,
+            nowNumber: 0,
+            randomNumber: 0,
+            isRandom: false,
             bingoNumberList: [],
             bingoNumberObjectList: [],
             prefix: this.roomid + '_',
@@ -64,6 +64,9 @@ export default {
     methods: {
         startBingo() {
             this.nowNumber = this.localGet('nowNumber');
+            if (this.nowNumber === null) {
+                this.nowNumber = 0;
+            }
 
             this.bingoNumberList = JSON.parse(this.localGet('bingoNumberList'));
             if (!this.bingoNumberList) {
@@ -106,12 +109,10 @@ export default {
                 this.endBingo();
                 return;
             }
+
+            this.isRandom = true;
             this.shuffle();
-            this.nowNumber = this.bingoNumberList.pop();
-            this.bingoNumberObjectList[this.nowNumber - 1].isIssued = true;
-            this.localSave('nowNumber', this.nowNumber);
-            this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
-            this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
+            this.shuffleLoop(75, 0);
         },
         getParticipants() {
             axios.get('/room/' + this.roomid + '/participants').then(response => {
@@ -125,6 +126,19 @@ export default {
                 let tmp = this.bingoNumberList[i];
                 this.bingoNumberList[i] = this.bingoNumberList[r];
                 this.bingoNumberList[r] = tmp;
+            }
+        },
+        shuffleLoop(maxCount, i) {
+            if (i <= maxCount) {
+                this.randomNumber = Math.floor(Math.random() * this.bingoNumberList.length);
+                setTimeout(() => {this.shuffleLoop(maxCount, ++i)}, 10);
+            } else {
+                this.nowNumber = this.bingoNumberList.pop();
+                this.bingoNumberObjectList[this.nowNumber - 1].isIssued = true;
+                this.isRandom = false;
+                this.localSave('nowNumber', this.nowNumber);
+                this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
+                this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
             }
         },
         localSave(key, value) {
@@ -153,6 +167,8 @@ export default {
     padding: 50px;
     margin: 0 auto;
     font-weight: 900;
+    width: 50vw;
+    box-sizing: border-box;
 }
 
 .button {
