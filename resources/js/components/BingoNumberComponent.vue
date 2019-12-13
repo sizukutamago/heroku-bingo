@@ -55,11 +55,13 @@ export default {
             bingoNumberList: [],
             bingoNumberObjectList: [],
             prefix: this.roomid + '_',
-            participants: []
+            participants: [],
+            sound: new Audio()
         }
     },
     mounted() {
         this.startBingo();
+        this.sound.src = '/sound/drumroll.mp3';
     },
     methods: {
         startBingo() {
@@ -129,9 +131,10 @@ export default {
             }
         },
         shuffleLoop(maxCount, i) {
+            this.sound.play();
             if (i <= maxCount) {
                 this.randomNumber = Math.floor(Math.random() * this.bingoNumberList.length);
-                setTimeout(() => {this.shuffleLoop(maxCount, ++i)}, 10);
+                setTimeout(() => {this.shuffleLoop(maxCount, ++i)}, 51);
             } else {
                 this.nowNumber = this.bingoNumberList.pop();
                 this.bingoNumberObjectList[this.nowNumber - 1].isIssued = true;
@@ -139,6 +142,7 @@ export default {
                 this.localSave('nowNumber', this.nowNumber);
                 this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
                 this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
+                this.audio.reset();
             }
         },
         localSave(key, value) {

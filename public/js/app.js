@@ -2074,11 +2074,13 @@ __webpack_require__.r(__webpack_exports__);
       bingoNumberList: [],
       bingoNumberObjectList: [],
       prefix: this.roomid + '_',
-      participants: []
+      participants: [],
+      sound: new Audio()
     };
   },
   mounted: function mounted() {
     this.startBingo();
+    this.sound.src = '/sound/drumroll.mp3';
   },
   methods: {
     startBingo: function startBingo() {
@@ -2161,11 +2163,13 @@ __webpack_require__.r(__webpack_exports__);
     shuffleLoop: function shuffleLoop(maxCount, i) {
       var _this2 = this;
 
+      this.sound.play();
+
       if (i <= maxCount) {
         this.randomNumber = Math.floor(Math.random() * this.bingoNumberList.length);
         setTimeout(function () {
           _this2.shuffleLoop(maxCount, ++i);
-        }, 10);
+        }, 51);
       } else {
         this.nowNumber = this.bingoNumberList.pop();
         this.bingoNumberObjectList[this.nowNumber - 1].isIssued = true;
@@ -2173,6 +2177,7 @@ __webpack_require__.r(__webpack_exports__);
         this.localSave('nowNumber', this.nowNumber);
         this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
         this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
+        this.audio.reset();
       }
     },
     localSave: function localSave(key, value) {
