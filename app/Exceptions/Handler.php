@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if (env('APP_ENV') === 'production') {
-            return redirect()->route('index')->with('error', 'エラーが発生しました。最初からやり直してください');
+            return redirect(route('index'));
         }
         return parent::render($request, $exception);
     }
