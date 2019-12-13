@@ -120,6 +120,9 @@ export default {
 
             this.isRandom = true;
             this.shuffle();
+            if (this.isSound) {
+                this.sound.play();
+            }
             this.shuffleLoop(75, 0);
         },
         getParticipants() {
@@ -137,9 +140,6 @@ export default {
             }
         },
         shuffleLoop(maxCount, i) {
-            if (this.isSound) {
-                this.sound.play();
-            }
             if (i <= maxCount) {
                 this.randomNumber = Math.floor(Math.random() * this.bingoNumberList.length);
                 setTimeout(() => {this.shuffleLoop(maxCount, ++i)}, 51);
