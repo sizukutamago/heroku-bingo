@@ -125,7 +125,7 @@ export default {
 
 .number p {
     font-size: 120px;
-    border: medium solid #00bfff;
+    border: medium solid #420098;
     display: inline-block;
     padding: 50px;
     margin: 0 auto;
@@ -140,8 +140,8 @@ export default {
     display: inline-block;
     padding: 0.3em 1em;
     text-decoration: none;
-    color: #67c5ff;
-    border: solid 2px #67c5ff;
+    color: #420098;
+    border: solid 2px #420098;
     border-radius: 3px;
     transition: .4s;
     font-size: 40px;
@@ -153,9 +153,9 @@ ul {
 }
 
 ul li {
-    color: #67c5ff;
+    color: #420098;
     padding: 0.5em 2em;
-    border: solid 2px #67c5ff;
+    border: solid 2px #420098;
     border-radius: 3px;
     margin:  10px;
     align-self: stretch;
@@ -163,7 +163,11 @@ ul li {
 }
 
 .square_color {
-    background-color: #67c5ff;
+    background-color: #420098;
     color: #fff;
+}
+
+.number {
+    color: #420098;
 }
 </style>

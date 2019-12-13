@@ -157,13 +157,13 @@ table{
 }
 
 table th,table td{
-    border:solid 2px #49c5f0;
+    border:solid 2px #420098;
     text-align: center;
     height: 10vh;
     width: 20vw;
 }
 
 .bingo-pushed {
-    background: #49c5f0;
+    background: #420098;
 }
 </style>

@@ -13,7 +13,7 @@
 .header {
     height: 75px;
     width: 100vw;
-    background-color: #67c5ff;
+    background-color: $purple;
     color: white;
     margin-bottom: 50px;
 }
@@ -38,9 +38,9 @@
 .btn {
     display: inline-block;
     text-align: left;
-    border: 2px solid #67c5ff;
+    border: 2px solid $purple;
     font-size: 16px;
-    color: #67c5ff;
+    color: $purple;
     text-decoration: none;
     font-weight: bold;
     padding: 8px 16px;
@@ -50,8 +50,8 @@
 }
 
 .btn:hover {
-    background-color: #67c5ff;
-    border-color: #67c5ff;
+    background-color: $purple;
+    border-color: $purple;
     color: #FFF;
 }
 
