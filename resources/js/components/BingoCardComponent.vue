@@ -86,12 +86,15 @@ export default {
 
             bingoColumn.isClicked = !bingoColumn.isClicked;
             this.localSave('bingoCard', JSON.stringify(this.bingoCard));
-            //todo: reachの状態が変わった時だけ投げるようにする
-            axios.get('/room/' + this.roomid + '/reach?isReach=' + this.checkReach() + '&username=' +this.username).then(response => {
-                console.log(response);
-            });
+            let isReach = this.checkReach();
+
+            if (isReach) {
+                axios.get('/room/' + this.roomid + '/reach?isReach=' + isReach + '&username=' +this.username).then(response => {
+                    console.log(response);
+                });
+            }
         },
-        checkReach() {
+        checkReach () {
             // 横チェック
             for (let i = 0; i < this.bingoCard.length; i++) {
                 let count = 0;
