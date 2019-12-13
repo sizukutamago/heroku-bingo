@@ -3,11 +3,33 @@
         <div v-if="nowNumber !== null" class="number"><p>{{ nowNumber }}</p></div>
 
         <div class="issued">
-            <ul>
-                <li v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index">
-                    {{bingoNumberObject.id}}
-                </li>
-            </ul>
+            <table border="1">
+                <tr>
+                    <th v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index" v-if="index < 15">
+                        {{bingoNumberObject.id}}
+                    </th>
+                </tr>
+                <tr>
+                    <th v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index" v-if="index > 14 && index < 30">
+                        {{bingoNumberObject.id}}
+                    </th>
+                </tr>
+                <tr>
+                    <th v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index" v-if="index > 29 && index < 45">
+                        {{bingoNumberObject.id}}
+                    </th>
+                </tr>
+                <tr>
+                    <th v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index" v-if="index > 44 && index < 60">
+                        {{bingoNumberObject.id}}
+                    </th>
+                </tr>
+                <tr>
+                    <th v-bind:class="{square_color: bingoNumberObject.isIssued}" v-for="(bingoNumberObject, index) in bingoNumberObjectList" :key="index" v-if="index > 59 && index < 75">
+                        {{bingoNumberObject.id}}
+                    </th>
+                </tr>
+            </table>
         </div>
 
         <!--
@@ -121,14 +143,16 @@ export default {
 <style scoped>
 .number {
     text-align: center;
+    color: #420098;
 }
 
 .number p {
-    font-size: 120px;
+    font-size: 180px;
     border: medium solid #420098;
     display: inline-block;
     padding: 50px;
     margin: 0 auto;
+    font-weight: 900;
 }
 
 .button {
@@ -147,27 +171,24 @@ export default {
     font-size: 40px;
 }
 
-ul {
-    display: flex;
-    flex-wrap: wrap;
+table {
+    width: 100vw;
+    height: 48vh;
+    border-collapse: collapse;
+    margin-top: 10px;
 }
 
-ul li {
+table th{
+    border:solid 1px #420098;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 60px;
+    font-weight: bold;
     color: #420098;
-    padding: 0.5em 2em;
-    border: solid 2px #420098;
-    border-radius: 3px;
-    margin:  10px;
-    align-self: stretch;
-    display: inline-block;
 }
 
 .square_color {
     background-color: #420098;
     color: #fff;
-}
-
-.number {
-    color: #420098;
 }
 </style>
