@@ -165,5 +165,6 @@ table th,table td{
 
 .bingo-pushed {
     background: #420098;
+    color: white;
 }
 </style>

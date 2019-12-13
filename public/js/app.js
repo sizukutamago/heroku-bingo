@@ -6761,7 +6761,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nheader p[data-v-23ca4e89] {\n    float: right;\n    margin-right: 10px;\n}\n.bingo-header[data-v-23ca4e89] {\n    height: 15vh;\n    width: 100%;\n}\ntable[data-v-23ca4e89]{\n    width: 100%;\n    height: 70vh;\n    border-collapse: collapse;\n}\ntable th[data-v-23ca4e89],table td[data-v-23ca4e89]{\n    border:solid 2px #420098;\n    text-align: center;\n    height: 10vh;\n    width: 20vw;\n}\n.bingo-pushed[data-v-23ca4e89] {\n    background: #420098;\n}\n", ""]);
+exports.push([module.i, "\nheader p[data-v-23ca4e89] {\n    float: right;\n    margin-right: 10px;\n}\n.bingo-header[data-v-23ca4e89] {\n    height: 15vh;\n    width: 100%;\n}\ntable[data-v-23ca4e89]{\n    width: 100%;\n    height: 70vh;\n    border-collapse: collapse;\n}\ntable th[data-v-23ca4e89],table td[data-v-23ca4e89]{\n    border:solid 2px #420098;\n    text-align: center;\n    height: 10vh;\n    width: 20vw;\n}\n.bingo-pushed[data-v-23ca4e89] {\n    background: #420098;\n    color: white;\n}\n", ""]);
 
 // exports
 
