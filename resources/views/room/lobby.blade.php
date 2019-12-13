@@ -6,7 +6,7 @@
         $route = route('participantLobby', ['roomId' => $roomId]);
     @endphp
 
-    <qriously class="qr" value="{{$route}}" size="400" ></qriously>
+    <qriously class="qr" value="{{$route}}" size="600" ></qriously>
     <a class="qr" href="{{ $route }}" target="_blank">{{ $route }}</a>
 
     <form method="get" action="{{ route('startGame') }}" target="_blank">
