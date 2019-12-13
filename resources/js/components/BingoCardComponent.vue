@@ -7,7 +7,8 @@
         <table>
             <tr v-for="(columns, index) in bingoCard" :key="index">
                 <td v-bind:class="{'bingo-pushed': column.isClicked}" @click="pushColumn(column)" v-for="column in columns" :key="column.id">
-                    {{ column.id }}
+                    <img style="width: 100%;padding: 0;" v-if="column.id === 'bingo!'" src="/img/heroku-logo.png"/>
+                    <span v-else>{{ column.id }}</span>
                 </td>
             </tr>
         </table>
@@ -158,7 +159,7 @@ table{
 table th,table td{
     border:solid 2px #49c5f0;
     text-align: center;
-    height: 10px;
+    height: 10vh;
     width: 20vw;
 }
 
