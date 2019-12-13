@@ -2062,6 +2062,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'BingoNumberComponent',
   props: ['roomid'],
@@ -2075,7 +2079,9 @@ __webpack_require__.r(__webpack_exports__);
       bingoNumberObjectList: [],
       prefix: this.roomid + '_',
       participants: [],
-      sound: new Audio()
+      sound: new Audio(),
+      isSound: true,
+      soundIcon: '/img/speaker-on.png'
     };
   },
   mounted: function mounted() {
@@ -2163,7 +2169,9 @@ __webpack_require__.r(__webpack_exports__);
     shuffleLoop: function shuffleLoop(maxCount, i) {
       var _this2 = this;
 
-      this.sound.play();
+      if (this.isSound) {
+        this.sound.play();
+      }
 
       if (i <= maxCount) {
         this.randomNumber = Math.floor(Math.random() * this.bingoNumberList.length);
@@ -2177,7 +2185,15 @@ __webpack_require__.r(__webpack_exports__);
         this.localSave('nowNumber', this.nowNumber);
         this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
         this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
-        this.audio.reset();
+      }
+    },
+    switchSound: function switchSound() {
+      this.isSound = !this.isSound;
+
+      if (this.isSound) {
+        this.soundIcon = '/img/speaker-on.png';
+      } else {
+        this.soundIcon = '/img/speaker-off.png';
       }
     },
     localSave: function localSave(key, value) {
@@ -38581,7 +38597,17 @@ var render = function() {
         },
         [_vm._v("ルーレット！")]
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c("img", {
+      staticStyle: { float: "right", "margin-right": "20px" },
+      attrs: { src: _vm.soundIcon },
+      on: { click: _vm.switchSound }
+    }),
+    _vm._v(" "),
+    _c("div", {
+      staticStyle: { content: "''", display: "block", clear: "both" }
+    })
   ])
 }
 var staticRenderFns = []

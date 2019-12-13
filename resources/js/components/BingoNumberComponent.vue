@@ -39,6 +39,10 @@
             <button v-show="!isStarted" @click="startBingo">スタート</button>
             <button v-show="isStarted" @click="getNextBingoNumber" v-bind:disabled="isRandom">ルーレット！</button>
         </div>
+        <img style="float: right;margin-right: 20px;" @click="switchSound" v-bind:src="soundIcon" />
+        <div style="content: '';
+        display: block;
+        clear: both;"></div>
     </div>
 </template>
 
@@ -56,7 +60,9 @@ export default {
             bingoNumberObjectList: [],
             prefix: this.roomid + '_',
             participants: [],
-            sound: new Audio()
+            sound: new Audio(),
+            isSound: true,
+            soundIcon: '/img/speaker-on.png'
         }
     },
     mounted() {
@@ -131,7 +137,9 @@ export default {
             }
         },
         shuffleLoop(maxCount, i) {
-            this.sound.play();
+            if (this.isSound) {
+                this.sound.play();
+            }
             if (i <= maxCount) {
                 this.randomNumber = Math.floor(Math.random() * this.bingoNumberList.length);
                 setTimeout(() => {this.shuffleLoop(maxCount, ++i)}, 51);
@@ -142,7 +150,14 @@ export default {
                 this.localSave('nowNumber', this.nowNumber);
                 this.localSave('bingoNumberList', JSON.stringify(this.bingoNumberList));
                 this.localSave('bingoNumberObjectList', JSON.stringify(this.bingoNumberObjectList));
-                this.audio.reset();
+            }
+        },
+        switchSound() {
+            this.isSound = !this.isSound;
+            if (this.isSound) {
+                this.soundIcon = '/img/speaker-on.png'
+            } else {
+                this.soundIcon = '/img/speaker-off.png'
             }
         },
         localSave(key, value) {
