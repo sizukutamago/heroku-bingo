@@ -9,6 +9,9 @@
     "env": {
         "DB_CONNECTION": {
             "value": "pgsql"
+        },
+        "APP_ENV": {
+            "value": "production"
         }
     },
     "addons": [
