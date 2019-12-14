@@ -173,7 +173,7 @@ export default {
 
                 for (let i = 0; i < diff.length; i++) {
                     this.flash(diff[i].username + 'さん リーチ!!', 'success', {
-                        timeout: 5000
+                        timeout: 10000
                     });
                 }
 
