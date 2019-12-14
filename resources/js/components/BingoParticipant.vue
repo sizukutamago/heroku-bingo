@@ -4,9 +4,6 @@
         <ul>
             <li v-for="(participant, index) in participants" :key="index">
                 {{participant.username}}
-                <p class="inline" v-if="participant.is_reach">
-                    リーチ！
-                </p>
             </li>
         </ul>
     </div>

@@ -7,7 +7,7 @@
     @endphp
 
     <qriously class="qr" value="{{$route}}" size="600" ></qriously>
-    <a class="qr" href="{{ $route }}" target="_blank">{{ $route }}</a>
+    <a class="qr" href="{{ $route }}">{{ $route }}</a>
 
     <form method="get" action="{{ route('startGame') }}" target="_blank">
         <button class="btn">ビンゴ開始！</button>
