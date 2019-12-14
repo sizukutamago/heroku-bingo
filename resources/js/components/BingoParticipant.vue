@@ -27,7 +27,6 @@ export default {
     methods: {
         getParticipants() {
             axios.get('/room/' + this.roomid + '/participants').then(response => {
-                console.log(response);
                 this.participants = response.data;
             });
         },

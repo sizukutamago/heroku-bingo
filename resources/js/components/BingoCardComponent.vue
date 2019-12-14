@@ -89,9 +89,7 @@ export default {
             let isReach = this.checkReach();
 
             if (isReach) {
-                axios.get('/room/' + this.roomid + '/reach?isReach=' + isReach + '&username=' +this.username).then(response => {
-                    console.log(response);
-                });
+                axios.get('/room/' + this.roomid + '/reach?isReach=' + isReach + '&username=' +this.username);
             }
         },
         checkReach () {
