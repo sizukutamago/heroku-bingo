@@ -12,4 +12,4 @@ npm-debug.log
 yarn-error.log
 .DS_Store
 /public/css/app.css
-/public/css/app.js
+/public/js/app.js

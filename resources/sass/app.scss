@@ -58,3 +58,13 @@
 .qr {
     margin-bottom: 50px;
 }
+
+.flash__wrapper {
+    position: absolute;
+    right: 10px;
+    z-index: 10;
+}
+
+.flash__close-button {
+    display: none;
+}

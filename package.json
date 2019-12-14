@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "normalize.css": "^8.0.1",
+        "vue-flash-message": "^0.7.2",
         "vue-qriously": "^1.1.1"
     }
 }

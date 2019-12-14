@@ -7,8 +7,11 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-window.VueQriously = require('vue-qriously');
+import VueQriously from 'vue-qriously';
+import VueFlashMessage from 'vue-flash-message';
+require('vue-flash-message/dist/vue-flash-message.min.css');
 Vue.use(VueQriously);
+Vue.use(VueFlashMessage);
 
 /**
  * The following block of code may be used to automatically register your

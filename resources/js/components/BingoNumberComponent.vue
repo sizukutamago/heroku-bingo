@@ -68,6 +68,8 @@ export default {
     mounted() {
         this.startBingo();
         this.sound.src = '/sound/drumroll.mp3';
+        this.getParticipants();
+        setInterval(this.getReachParticipants, 5000);
     },
     methods: {
         startBingo() {
@@ -158,6 +160,25 @@ export default {
             } else {
                 this.soundIcon = '/img/speaker-off.png'
             }
+        },
+        getReachParticipants() {
+            axios.get('/room/' + this.roomid + '/participants').then(response => {
+                let diff = response.data.filter(responseParticipant => {
+                    for (let i = 0; i < this.participants.length; i++) {
+                        if (responseParticipant.id === this.participants[i].id) {
+                            return !this.participants[i].is_reach && responseParticipant.is_reach
+                        }
+                    }
+                });
+
+                for (let i = 0; i < diff.length; i++) {
+                    this.flash(diff[i].username + 'さん リーチ!!', 'success', {
+                        timeout: 5000
+                    });
+                }
+
+                this.participants = response.data;
+            });
         },
         localSave(key, value) {
             localStorage.setItem(this.prefix + key, value);
