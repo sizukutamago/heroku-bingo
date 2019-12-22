@@ -12,8 +12,8 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
       - name: Cache dependencies
+      - uses: actions/checkout@v1
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
