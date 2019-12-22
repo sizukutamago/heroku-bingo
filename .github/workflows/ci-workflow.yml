@@ -14,7 +14,7 @@ jobs:
     - name: Generate key
       run: |
         php artisan key:generate
-        cat .env
+        php artisan config:cache
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
     - name: Upgrade Chrome Driver
