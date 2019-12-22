@@ -25,7 +25,7 @@ class AccessBingoRouletteTest extends DuskTestCase
             // _blackで別タブで開くため最後に開いたタブに遷移する
             $window = collect($browser->driver->getWindowHandles())->last();
             $browser->driver->switchTo()->window($window);
-            $browser->assertSee('ルーレット');
+            $browser->assertSee('ルーレット！');
         });
     }
 }
