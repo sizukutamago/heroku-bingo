@@ -28,7 +28,7 @@ jobs:
       run: |
         chmod -R 0755 vendor/laravel/dusk/bin
         ./vendor/laravel/dusk/bin/chromedriver-linux --version
-        ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+        ./vendor/laravel/dusk/bin/chromedriver-linux
     - name: Run Laravel Server
       run: php artisan serve > /dev/null 2>&1 &
     - name: Run Dusk Tests
