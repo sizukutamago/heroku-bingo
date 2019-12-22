@@ -22,19 +22,19 @@ class CreateRoomTest extends DuskTestCase
     /**
      * @test
      */
-    public function 初回アクセス()
+    public function セッションがない状態でルーム作成した時()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new TopPage)
-                    ->createBingoRoom()
-                    ->assertSee('ビンゴ開始！');
+            $browser->visit($this->topPage)
+                ->createBingoRoom()
+                ->assertSee('ビンゴ開始！');
         });
     }
 
     /**
      * @test
      */
-    public function アクセス()
+    public function セッションがある状態でルーム作成した時()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit($this->topPage)
