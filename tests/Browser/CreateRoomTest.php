@@ -9,6 +9,8 @@ use Tests\DuskTestCase;
 
 class CreateRoomTest extends DuskTestCase
 {
+    use DatabaseMigrations;
+
     /**
      * @test
      */
