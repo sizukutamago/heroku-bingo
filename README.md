@@ -1,5 +1,7 @@
 # bingo game
 
+![](https://github.com/sizukutamago/heroku-bingo/workflows/Laravel/badge.svg)
+
 ## demo
 https://heroku-binbinbingo.herokuapp.com/
 
