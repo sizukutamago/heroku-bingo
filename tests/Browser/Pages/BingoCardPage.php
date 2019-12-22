@@ -4,7 +4,7 @@ namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
 
-class TopPage extends Page
+class BingoCardPage extends Page
 {
     /**
      * Get the URL for the page.
@@ -19,14 +19,12 @@ class TopPage extends Page
     /**
      * Assert that the browser is on the page.
      *
-     * @param \Laravel\Dusk\Browser $browser
+     * @param  Browser  $browser
      * @return void
      */
     public function assert(Browser $browser)
     {
-        $browser
-            ->assertSee('ビンビンビンゴ！！！')
-            ->assertSee('ビンゴルームを作成！');
+        $browser->assertPathIs($this->url());
     }
 
     /**
@@ -41,9 +39,12 @@ class TopPage extends Page
         ];
     }
 
-    // todo: bignoLobbyPageに移動した方がいい気がする
-    public function createBingoRoom(Browser $browser)
-    {
-        $browser->click('form > .btn');
+    public function accessBingoCardPage(Browser $browser, string $bingoCardUrl) {
+        return $browser->visit($bingoCardUrl)
+            ->assertSee('ニックネームを決めてビンゴ開始！')
+            ->type('username', 'testUser')
+            ->click('form > .btn')
+            ->assertSourceHas('src="/img/bingo.jpg"')
+            ->assertSourceHas('src="/img/heroku-logo.png"');
     }
 }
