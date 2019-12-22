@@ -19,7 +19,7 @@ jobs:
       - uses: actions/cache@v1
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles(format('{0}{1}', github.workspace, '/../composer.lock')) }}
+          key: ${{ runner.os }}-composer-${{ hashFiles(format('{0}{1}', github.workspace, '/../composer.lock')) }}-${{{ ls }}
           restore-keys: |
             ${{ runner.os }}-composer-
       - name: Copy .env
