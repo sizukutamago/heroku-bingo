@@ -14,7 +14,8 @@ jobs:
     - name: Generate key
       run: |
         php artisan key:generate
-        php artisan config:cache
+    - name: Create Database
+      run: echo 'create database laravel' | mysql -u root -p root
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
     - name: Upgrade Chrome Driver
