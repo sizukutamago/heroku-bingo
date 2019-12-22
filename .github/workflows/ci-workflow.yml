@@ -15,7 +15,7 @@ jobs:
       run: |
         php artisan key:generate
     - name: Create Database
-      run: echo 'create database laravel' | mysql -u root -p root
+      run: echo 'create database laravel' | mysql -u root -proot
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
     - name: Upgrade Chrome Driver
