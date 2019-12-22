@@ -8,12 +8,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Copy .env
-      run: cp .env.testing .env
+      run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
     - name: Generate key
       run: |
-        php artisan config:clear
         php artisan key:generate
         cat .env
     - name: Execute tests (Unit and Feature tests) via PHPUnit
