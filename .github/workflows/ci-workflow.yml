@@ -14,10 +14,12 @@ jobs:
     steps:
       - name: Get Composer Cache Directory
         id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
       - uses: actions/cache@v1
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles(format('{0}{1}', github.workspace, '/composer.lock')) }}
+          key: ${{ runner.os }}-composer-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
           restore-keys: |
             ${{ runner.os }}-composer-
       - name: Copy .env
