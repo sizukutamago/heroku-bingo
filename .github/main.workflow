@@ -1,4 +1,4 @@
-name: Laravel
+name: CI
 
 on: pull_request
 
