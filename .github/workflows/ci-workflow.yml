@@ -31,4 +31,6 @@ jobs:
     - name: Run Laravel Server
       run: php artisan serve > /dev/null 2>&1 &
     - name: Run Dusk Tests
-      run: php artisan dusk --env=dusk
+      run: |
+        php artisan migrate
+        php artisan dusk --env=dusk
