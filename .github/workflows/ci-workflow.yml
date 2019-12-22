@@ -15,8 +15,12 @@ jobs:
       - name: Cache dependencies
         uses: actions/checkout@v1
         with:
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
       - name: Install Dependencies & Build
