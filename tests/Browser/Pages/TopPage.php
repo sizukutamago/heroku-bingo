@@ -4,7 +4,7 @@ namespace Tests\Browser\Pages;
 
 use Laravel\Dusk\Browser;
 
-class HomePage extends Page
+class TopPage extends Page
 {
     /**
      * Get the URL for the page.
@@ -19,12 +19,14 @@ class HomePage extends Page
     /**
      * Assert that the browser is on the page.
      *
-     * @param  \Laravel\Dusk\Browser  $browser
+     * @param \Laravel\Dusk\Browser $browser
      * @return void
      */
     public function assert(Browser $browser)
     {
-        //
+        $browser
+            ->assertSee('ビンビンビンゴ！！！')
+            ->assertSee('ビンゴルームを作成！');
     }
 
     /**
@@ -37,5 +39,10 @@ class HomePage extends Page
         return [
             '@element' => '#selector',
         ];
+    }
+
+    public function createBingoRoom(Browser $browser)
+    {
+        $browser->click('form > .btn');
     }
 }
