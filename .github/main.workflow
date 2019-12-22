@@ -1,6 +1,6 @@
-name: Laravel
+name: CI
 
-on: [push, pull_request]
+on: pull_request
 
 jobs:
   laravel-tests:
