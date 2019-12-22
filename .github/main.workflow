@@ -1,7 +1,12 @@
 name: CI
 
-on: pull_request
-
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
